@@ -6,7 +6,11 @@
 package getGame;
 
 import java.awt.Color;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Map;
 import javax.swing.JOptionPane;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 /**
  *
@@ -17,6 +21,11 @@ public class Login extends javax.swing.JFrame {
     /**
      * Creates new form Login
      */
+    
+    Conexao dadosConexao = new Conexao();
+        
+     JdbcTemplate jdbcTemplate = new JdbcTemplate(dadosConexao.getDataSource());
+     
     public Login() {
         initComponents();
     }
@@ -48,7 +57,7 @@ public class Login extends javax.swing.JFrame {
         setResizable(false);
         setSize(new java.awt.Dimension(400, 410));
 
-        jPanel1.setBackground(new java.awt.Color(27, 187, 125));
+        jPanel1.setBackground(new java.awt.Color(242, 199, 62));
 
         jLabel1.setFont(new java.awt.Font("Fira Code", 1, 24)); // NOI18N
         jLabel1.setForeground(new java.awt.Color(255, 255, 255));
@@ -72,12 +81,15 @@ public class Login extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
+        jLabel1.getAccessibleContext().setAccessibleDescription("");
+
         jPanel2.setForeground(new java.awt.Color(255, 255, 255));
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(91, 95, 99));
-        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel2.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel2.setText("Informe sua senha");
+        jLabel2.setToolTipText("");
 
         btnEntrar.setBackground(new java.awt.Color(58, 65, 84));
         btnEntrar.setFont(new java.awt.Font("Segoe UI", 1, 14)); // NOI18N
@@ -121,33 +133,41 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
+        txtLogin.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                txtLoginActionPerformed(evt);
+            }
+        });
+
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(91, 95, 99));
-        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
         jLabel3.setText("Informe seu nome de usuário");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtSenha)
                     .addGroup(jPanel2Layout.createSequentialGroup()
-                        .addComponent(txtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addGap(6, 6, 6)
+                        .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(jPanel2Layout.createSequentialGroup()
                         .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(btnSair, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE)
-                            .addComponent(btnEntrar, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE))
-                        .addGap(0, 0, Short.MAX_VALUE)))
-                .addContainerGap())
+                            .addComponent(txtSenha)
+                            .addGroup(jPanel2Layout.createSequentialGroup()
+                                .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(txtLogin, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(btnSair, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE)
+                                    .addComponent(btnEntrar, javax.swing.GroupLayout.DEFAULT_SIZE, 360, Short.MAX_VALUE))
+                                .addGap(0, 0, Short.MAX_VALUE)))
+                        .addContainerGap())))
             .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                .addGroup(jPanel2Layout.createSequentialGroup()
-                    .addGap(16, 16, 16)
-                    .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                    .addContainerGap(24, Short.MAX_VALUE)
+                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 356, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addContainerGap()))
         );
 
@@ -171,7 +191,7 @@ public class Login extends javax.swing.JFrame {
                 .addGroup(jPanel2Layout.createSequentialGroup()
                     .addGap(30, 30, 30)
                     .addComponent(jLabel3)
-                    .addContainerGap(297, Short.MAX_VALUE)))
+                    .addContainerGap(303, Short.MAX_VALUE)))
         );
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
@@ -221,16 +241,44 @@ public class Login extends javax.swing.JFrame {
         btnSair.setForeground(Color.WHITE);
     }//GEN-LAST:event_btnSairMouseExited
 
+    private List listarTodos(){
+        String selectBanco = String.format
+        ("select * from tbUsuario where CPFUsuario = '%s' and senhaUsuario = '%s' ",
+                txtLogin.getText(),txtSenha.getText());
+        List<Map<String,Object>> query = jdbcTemplate.queryForList(
+        selectBanco);
+        System.out.println(query);
+        return query;
+    }
+    
+    private List getNomeUsuarioBanco(){
+        String selectBanco = String.format(
+        "select nomeUsuario from tbUsuario where CPFUsuario = '%s' and senhaUsuario = '%s' ",
+                txtLogin.getText(),txtSenha.getText());
+        
+        List<Map<String,Object>> query = jdbcTemplate.queryForList(selectBanco);
+        
+        return query;
+    }
+    
     private void btnEntrarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEntrarActionPerformed
-        if(txtLogin.getText().equals("gerson") && txtSenha.getText().equals("123")){
+
+        listarTodos();
+        if(!listarTodos().isEmpty()){
             TelaPrincipal tela = new TelaPrincipal();
-            tela.setNomeUsuario(txtLogin.getText());
+            tela.setNomeUsuario(getNomeUsuarioBanco().toString());
             tela.setVisible(true);
             dispose();
-        }else{
-            JOptionPane.showMessageDialog(rootPane, "Senha ou Usuário incorretos!");
+        } else {
+            JOptionPane.showMessageDialog(rootPane,"Verifique as credenciais.");
         }
+        
+        
     }//GEN-LAST:event_btnEntrarActionPerformed
+
+    private void txtLoginActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_txtLoginActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_txtLoginActionPerformed
 
     /**
      * @param args the command line arguments
