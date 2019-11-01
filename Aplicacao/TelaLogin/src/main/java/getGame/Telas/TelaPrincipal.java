@@ -20,7 +20,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     Ram ram = new Ram();
     Disco disk = new Disco();
     CPU cpu = new CPU();
-    Processos dados2 = new Processos();
+    Processos processos = new Processos();
 
     public TelaPrincipal() {
         initComponents();
@@ -50,7 +50,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                     lbRAM.setText(ram.getRAM());
                     lbHD.setText(disk.getDisco());
                     lbProcessos.setText("");
-                    lbProcessos.setText(String.format(dados2.getProcessos()));
+                    lbProcessos.setText(String.format(processos.getProcessos()));
                 }
             } catch (Exception e) {
             }
