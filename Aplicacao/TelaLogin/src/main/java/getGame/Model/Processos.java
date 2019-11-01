@@ -1,36 +1,32 @@
-package getGame;
+package getGame.Model;
 
 import oshi.SystemInfo;
 import oshi.hardware.GlobalMemory;
 import oshi.hardware.HardwareAbstractionLayer;
 import oshi.software.os.OSProcess;
 import oshi.software.os.OperatingSystem;
-import oshi.util.FormatUtil;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
-public class TesteProcessos {
+public class Processos {
     
     private static List<String> oshi = new ArrayList<String>();
-    private String stringFinal;
+    private String processoFormatado;
     
     public String getProcessos() {
-        stringFinal = "";
+        processoFormatado = "";
         SystemInfo si = new SystemInfo();
         HardwareAbstractionLayer hal = si.getHardware();
         OperatingSystem os = si.getOperatingSystem();
         printProcesses(os, hal.getMemory());
 
-        
-        StringBuffer s = new StringBuffer(oshi.size());
         for (String parteTexto : oshi) {;
-            stringFinal=parteTexto.concat(oshi + "\r\n");
+            processoFormatado=parteTexto.concat(oshi + "\r\n");
         }
-        //System.out.println(stringFinal);;;
-
-        return stringFinal;
+        
+        return processoFormatado;
     }
 
     private static void printProcesses(OperatingSystem os, GlobalMemory memory) {

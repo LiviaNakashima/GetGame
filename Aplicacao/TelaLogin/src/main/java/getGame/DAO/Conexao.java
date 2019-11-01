@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package getGame;
+package getGame.DAO;
 
 import org.apache.commons.dbcp2.BasicDataSource;
 
@@ -16,9 +16,9 @@ public class Conexao {
     private BasicDataSource dataSource;
 
     public Conexao() {
-        dataSource​ =  new​ BasicDataSource();
-        dataSource​.setDriverClassName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
-        dataSource​.setUrl("jdbc:sqlserver://srvgetgame.database.windows.net:1433;user=usergetgame;password=#Gfgrupo2b;databaseName=bdGrupo2");
+        dataSource =  new BasicDataSource();
+        dataSource.setDriverClassName("com.microsoft.sqlserver.jdbc.SQLServerDriver");
+        dataSource.setUrl("jdbc:sqlserver://srvgetgame.database.windows.net:1433;user=usergetgame;password=#Gfgrupo2b;databaseName=bdGrupo2");
         //dataSource​.setUrl("jdbc:sqlserver://srvgetgame.database.windows.net/bdGrupo2");
 
         // quem for acessar do yoshi: localhost -> 10.3.2.180

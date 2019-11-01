@@ -3,8 +3,12 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package getGame;
+package getGame.Telas;
 
+import getGame.Model.Processos;
+import getGame.Model.CPU;
+import getGame.Model.Disco;
+import getGame.Model.Ram;
 import oshi.util.Util;
 
 /**
@@ -13,8 +17,10 @@ import oshi.util.Util;
  */
 public class TelaPrincipal extends javax.swing.JFrame {
 
-    AquisicaoDados dados = new AquisicaoDados();
-    TesteProcessos dados2 = new TesteProcessos();
+    Ram ram = new Ram();
+    Disco disk = new Disco();
+    CPU cpu = new CPU();
+    Processos dados2 = new Processos();
 
     public TelaPrincipal() {
         initComponents();
@@ -40,14 +46,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 Boolean verificacao = true;
                 while (verificacao) {
                     Util.sleep(3000);
-                    lbCPU.setText(dados.getCPU());
-                    lbRAM.setText(dados.getRAM());
-                    lbHD.setText(dados.getDisco());
+                    lbCPU.setText(cpu.getCPU());
+                    lbRAM.setText(ram.getRAM());
+                    lbHD.setText(disk.getDisco());
                     lbProcessos.setText("");
                     lbProcessos.setText(String.format(dados2.getProcessos()));
                 }
             } catch (Exception e) {
-                System.out.println("Erro: " + e);
             }
         }
     };

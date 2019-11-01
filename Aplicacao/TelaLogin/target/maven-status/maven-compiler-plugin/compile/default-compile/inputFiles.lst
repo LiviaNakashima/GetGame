@@ -1,5 +1,7 @@
-/Users/macos/Desktop/TerceiraSprint/GetGame/Aplicacao/TelaLogin/src/main/java/getGame/TelaPrincipal.java
-/Users/macos/Desktop/TerceiraSprint/GetGame/Aplicacao/TelaLogin/src/main/java/getGame/Login.java
-/Users/macos/Desktop/TerceiraSprint/GetGame/Aplicacao/TelaLogin/src/main/java/getGame/AquisicaoDados.java
-/Users/macos/Desktop/TerceiraSprint/GetGame/Aplicacao/TelaLogin/src/main/java/getGame/TesteProcessos.java
-/Users/macos/Desktop/TerceiraSprint/GetGame/Aplicacao/TelaLogin/src/main/java/getGame/Conexao.java
+D:\Faculdade\PI\BandTec\GetGame\Aplicacao\TelaLogin\src\main\java\getGame\Model\Processos.java
+D:\Faculdade\PI\BandTec\GetGame\Aplicacao\TelaLogin\src\main\java\getGame\Model\Ram.java
+D:\Faculdade\PI\BandTec\GetGame\Aplicacao\TelaLogin\src\main\java\getGame\DAO\Conexao.java
+D:\Faculdade\PI\BandTec\GetGame\Aplicacao\TelaLogin\src\main\java\getGame\Telas\TelaPrincipal.java
+D:\Faculdade\PI\BandTec\GetGame\Aplicacao\TelaLogin\src\main\java\getGame\Model\CPU.java
+D:\Faculdade\PI\BandTec\GetGame\Aplicacao\TelaLogin\src\main\java\getGame\Telas\Login.java
+D:\Faculdade\PI\BandTec\GetGame\Aplicacao\TelaLogin\src\main\java\getGame\Model\Disco.java

@@ -3,15 +3,14 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package getGame;
+package getGame.Telas;
 
+import getGame.DAO.Conexao;
 import java.awt.Color;
-import java.util.Arrays;
 import java.util.List;
 import java.util.Map;
 import javax.swing.JOptionPane;
 import org.springframework.jdbc.core.JdbcTemplate;
-
 /**
  *
  * @author Regin
@@ -21,6 +20,7 @@ public class Login extends javax.swing.JFrame {
     /**
      * Creates new form Login
      */
+    
     
     Conexao dadosConexao = new Conexao();
         
@@ -142,7 +142,7 @@ public class Login extends javax.swing.JFrame {
         jLabel3.setFont(new java.awt.Font("Tahoma", 0, 14)); // NOI18N
         jLabel3.setForeground(new java.awt.Color(91, 95, 99));
         jLabel3.setHorizontalAlignment(javax.swing.SwingConstants.LEFT);
-        jLabel3.setText("Informe seu nome de usuário");
+        jLabel3.setText("Informe seu nome de usuÃ¡rio");
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
