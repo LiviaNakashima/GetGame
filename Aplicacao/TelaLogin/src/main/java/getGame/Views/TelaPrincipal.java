@@ -3,7 +3,7 @@
  * To change this template file, choose Tools | Templates
  * and open the template in the editor.
  */
-package getGame.Telas;
+package getGame.Views;
 
 import getGame.Model.Processos;
 import getGame.Model.CPU;
@@ -30,7 +30,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         lbNomeUsuario.setText(login);
     }
 
-    public void limparLabel() {
+    private void limparLabel() {
 
         lbCPU.setText("");
         lbHD.setText("");
