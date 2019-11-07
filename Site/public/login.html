@@ -31,7 +31,7 @@
                 <div class="LoginForm" id="loginEntrar">
                     <p class="loginTitulo">Entrar</p>
                     <form id="formularioLogin" method="POST" onsubmit="return entrar()">
-                        <input id="login" name="login" type="text" placeholder="Endereço de email">
+                        <input id="login" name="login" type="text" placeholder="Usuário">
                         <br>
                         <input id="senha" name="senha" type="password" placeholder="Senha">
                         <br>
@@ -43,7 +43,9 @@
         </div>
     </header>
 </body>
-
+<script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@8"></script>
+<script src="https://cdn.jsdelivr.net/npm/promise-polyfill"></script>
 </html>
 
 <script>
@@ -76,11 +78,25 @@
         sessionStorage.nome = resposta.nomeUsuario;
         sessionStorage.permissao = resposta.permissaoUsuario;
         verificarAutenticacao();
-                    
+
+        Swal.fire({
+                        title: "Sucesso",
+                        text: "Login realizado com sucesso!",
+                        type: "success"
+                    })  .then(willDelete => {
+                        window.location.href = 'views/index.html';
+                    });
+      
     });
         }else{
             console.log("Erro ao tentar se conectar");
             fimEspera();
+
+            Swal.fire({
+                    title: "Erro",
+                    text: "Usuário ou senha inválidos!",
+                    type: "error",
+                });
         }
     });
         return false;
