@@ -9680,6 +9680,10 @@ button.bg-dark:hover {
     color: #4e73df!important
 }
 
+.text-dashboard{
+    color: #d19532;
+}
+
 a.text-primary:focus,
 a.text-primary:hover {
     color: #224abe!important
