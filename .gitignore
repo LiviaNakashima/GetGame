@@ -5,6 +5,10 @@ npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
+Aplicacao/TelaLogin/target/*
+Aplicacao/TelaLogin/target/
+Aplicacao/TelaLogin/target
+
 # Runtime data
 pids
 *.pid

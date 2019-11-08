@@ -27,7 +27,7 @@
         <dependency>
             <groupId>com.github.oshi</groupId>
             <artifactId>oshi-core</artifactId>
-            <version>3.13.3</version>
+            <version>3.5.0</version>
         </dependency>
         <dependency>
             <groupId>org.springframework</groupId>
@@ -50,6 +50,28 @@
             <artifactId>mysql-connector-java</artifactId>
             <version>8.0.8-dmr</version>
         </dependency>
+        <!-- https://mvnrepository.com/artifact/log4j/log4j -->
+        <dependency>
+            <groupId>log4j</groupId>
+            <artifactId>log4j</artifactId>
+            <version>1.2.17</version>
+        </dependency>
+        <dependency>
+            <groupId> org.apache.cassandra</groupId>
+            <artifactId>cassandra-all</artifactId>
+            <version>0.8.1</version>
+        <exclusions>
+          <exclusion> 
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-log4j12</artifactId>
+          </exclusion>
+          <exclusion>
+              <groupId>log4j</groupId>
+              <artifactId>log4j</artifactId>
+          </exclusion>
+        </exclusions>
+    </dependency>
+        
     </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>

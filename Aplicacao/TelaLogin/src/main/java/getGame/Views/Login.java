@@ -9,6 +9,7 @@ import getGame.DAO.Conexao;
 import java.awt.Color;
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import org.springframework.jdbc.core.JdbcTemplate;
 /**
@@ -25,7 +26,7 @@ public class Login extends javax.swing.JFrame {
     Conexao dadosConexao = new Conexao();
         
     JdbcTemplate jdbcTemplate = new JdbcTemplate(dadosConexao.getDataSource());
-     
+    Logger gameLog = Logger.getLogger("game");
     public Login() {
         initComponents();
     }

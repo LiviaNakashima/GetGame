@@ -9,6 +9,7 @@ import getGame.Model.Processos;
 import getGame.Model.CPU;
 import getGame.Model.Disco;
 import getGame.Model.Ram;
+import java.util.logging.Logger;
 import oshi.util.Util;
 
 /**
@@ -17,6 +18,7 @@ import oshi.util.Util;
  */
 public class TelaPrincipal extends javax.swing.JFrame {
 
+    Logger gameLog = Logger.getLogger("game");
     Ram ram = new Ram();
     Disco disk = new Disco();
     CPU cpu = new CPU();
@@ -51,6 +53,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                     lbHD.setText(disk.getDisco());
                     lbProcessos.setText("");
                     lbProcessos.setText(String.format(processos.getProcessos()));
+                    gameLog.info(String.format("Status do Servidor: cpu %s, ram %s, disco %s",
+                    cpu.getCPU(), ram.getRAM(),disk.getDisco()));
                 }
             } catch (Exception e) {
             }
