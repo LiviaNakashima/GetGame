@@ -24,8 +24,8 @@ public class Conexao {
         // quem for acessar do yoshi: localhost -> 10.3.2.180
         // quem for acessar do yoshi: gaga -> gaga-seunome
         
-        //dataSource​.setUsername("usergetgame");
-        //dataSource​.setPassword("#Gfgrupo2b"); // ou sua senha
+        dataSource​.setUsername("usergetgame");
+        dataSource​.setPassword("#Gfgrupo2b"); // ou sua senha
     }
 
     public BasicDataSource getDataSource() {

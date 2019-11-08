@@ -55,5 +55,10 @@ public class CPU {
         return String.format("<html>%s <br> %s</html>",
                 si.getHardware().getProcessor().toString(),
                 printCpu(si.getHardware().getProcessor()) + "%");
+        
+        
     }
+    
+   
+    
 }
