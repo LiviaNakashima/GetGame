@@ -1,3 +1,4 @@
+getGame\DAO\CpuDAO.class
 getGame\Model\Processos.class
 getGame\Views\Login.class
 getGame\Views\TelaPrincipal$5.class
@@ -10,10 +11,12 @@ getGame\DAO\Conexao.class
 getGame\Views\Login$6.class
 getGame\Views\TelaPrincipal$2.class
 getGame\Views\Login$1.class
+getGame\DAO\RamDAO.class
 getGame\Views\TelaPrincipal$1.class
 getGame\Views\Login$3.class
 getGame\Model\CPU.class
 getGame\Model\Ram.class
 getGame\Views\TelaPrincipal.class
+getGame\DAO\DiscoDAO.class
 getGame\Views\Login$4.class
 getGame\Views\TelaPrincipal$4.class

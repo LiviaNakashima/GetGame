@@ -23,7 +23,7 @@ public class Disco {
         File[] roots = File.listRoots();
         for (File root : roots) {
             String usedSpace = FormatUtil.formatBytes(root.getTotalSpace() - root.getUsableSpace());
-            String discos = String.format("%s",
+            String discos = String.format("%s , %s",
              usedSpace, FormatUtil.formatBytes(root.getTotalSpace()));
             dadosDisco = discos;
         }
@@ -34,16 +34,25 @@ public class Disco {
     
     private static String printDisco(HWDiskStore[] diskStores) {
 
-        String dadosDisco = null;
+       
         File[] roots = File.listRoots();
+        String valorFinal = "0.00";
         for (File root : roots) {
             
-             String usableSpace = FormatUtil.formatBytes(root.getUsableSpace()).replace("GiB","");
-             String totalSpace = FormatUtil.formatBytes(root.getTotalSpace()).replace("GiB", "");
-             String usedSpace = FormatUtil.formatBytes(root.getTotalSpace() - root.getUsableSpace()).replace("GiB","");   
-             Double porcentagemEspacoRestante = (Double.parseDouble(usableSpace)
-                     / Double.parseDouble(totalSpace) * 100);
+             String usableSpace = (FormatUtil.formatBytes(root.getUsableSpace()).replace("GiB","")).replace(",",".");
+             Double espacoUtilizavel = Double.parseDouble(usableSpace);
+             String totalSpace = (FormatUtil.formatBytes(root.getTotalSpace()).replace("GiB", "")).replace(",", ".");
              Double espacoTotal = Double.parseDouble(totalSpace);
+             String usedSpace = (FormatUtil.formatBytes(root.getTotalSpace() - root.getUsableSpace()).replace("GiB","")).replace(",",".");
+             Double espacoUsado = Double.parseDouble(usedSpace);
+             Double porcentagemEspacoRestante = (espacoUtilizavel / espacoTotal) * 100;
+             
+             valorFinal =  String.format("%.2f",porcentagemEspacoRestante);
+             
+             System.out.println(espacoUtilizavel);
+             System.out.println(espacoTotal);
+             System.out.println(espacoUsado);
+             System.out.println(porcentagemEspacoRestante);
              
              
             
@@ -54,7 +63,7 @@ public class Disco {
            //  usedSpace, FormatUtil.formatBytes(root.getTotalSpace()));
            // dadosDisco = discos;
         }
-                return dadosDisco;
+     return valorFinal;
     }
     
     public String getDisco() {
