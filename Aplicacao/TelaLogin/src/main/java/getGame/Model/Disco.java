@@ -23,7 +23,7 @@ public class Disco {
         File[] roots = File.listRoots();
         for (File root : roots) {
             String usedSpace = FormatUtil.formatBytes(root.getTotalSpace() - root.getUsableSpace());
-            String discos = String.format("%s , %s",
+            String discos = String.format("%s used of %s",
              usedSpace, FormatUtil.formatBytes(root.getTotalSpace()));
             dadosDisco = discos;
         }
@@ -49,28 +49,69 @@ public class Disco {
              
              valorFinal =  String.format("%.2f",porcentagemEspacoRestante);
              
-             System.out.println(espacoUtilizavel);
-             System.out.println(espacoTotal);
-             System.out.println(espacoUsado);
-             System.out.println(porcentagemEspacoRestante);
+             //System.out.println(espacoUtilizavel);
+             //System.out.println(espacoTotal);
+            // System.out.println(espacoUsado);
+           // System.out.println(porcentagemEspacoRestante);
              
-             
-            
-       //     String usableSpace = FormatUtil.formatBytes(root.getUsableSpace()).replace("GiB","");
-         //   String usedSpace = FormatUtil.formatBytes(root.getTotalSpace() - root.getUsableSpace());
-           // Double espacoUtilizavel = (Double.parseDouble(usableSpace) / FormatUtil.formatBytes(root.getTotalSpace()));
-           // String discos = String.format("%s",
-           //  usedSpace, FormatUtil.formatBytes(root.getTotalSpace()));
-           // dadosDisco = discos;
         }
      return valorFinal;
     }
     
-    public String getDisco() {
+  
+    
+         private static String EspacoUtilizavel(HWDiskStore[] diskStores) {
+             
+        File[] roots = File.listRoots();
+        String valorPorcentagemEspacoRestante = "0.00";
+        for (File root : roots) {
+            
+            String usableSpace = (FormatUtil.formatBytes(root.getUsableSpace()).replace("GiB","")).replace(",",".");
+            Double espacoUtilizavel = Double.parseDouble(usableSpace);
+            String totalSpace = (FormatUtil.formatBytes(root.getTotalSpace()).replace("GiB", "")).replace(",", ".");
+            Double espacoTotal = Double.parseDouble(totalSpace);
+            Double porcentagemEspacoRestante = (espacoUtilizavel / espacoTotal) * 100;
+            valorPorcentagemEspacoRestante =  String.format("%.2f",porcentagemEspacoRestante);
+          
+        }  
+        return valorPorcentagemEspacoRestante;
+         }
+         
+         private static String EspacoTotal(HWDiskStore[] diskStores) {
+             File[] roots = File.listRoots();
+             String valorEspacoTotal = "0.00";
+             for (File root : roots) {
+            String totalSpace = (FormatUtil.formatBytes(root.getTotalSpace()).replace("GiB", "")).replace(",", ".");
+            Double espacoTotal = Double.parseDouble(totalSpace);
+            
+               valorEspacoTotal = String.format("%s", espacoTotal );           
+             }
+             return valorEspacoTotal;
+         }
+          
+         public String getEspacoUtilizavel() {
+        SystemInfo si = new SystemInfo();
+        HardwareAbstractionLayer hal = si.getHardware();
+        
+        EspacoUtilizavel(hal.getDiskStores());
+        return String.format("%s",EspacoUtilizavel(hal.getDiskStores()));
+                
+         }
+         
+         public String getEspacoTotal() {
+        SystemInfo si = new SystemInfo();
+        HardwareAbstractionLayer hal = si.getHardware();
+        
+        EspacoTotal(hal.getDiskStores());
+        return String.format("%s",EspacoTotal(hal.getDiskStores()));
+                
+         } 
+      
+        public String getDisco() {
         SystemInfo si = new SystemInfo();
         HardwareAbstractionLayer hal = si.getHardware();
 
         printDisks(hal.getDiskStores());
-        return String.format("%s",printDisco(hal.getDiskStores()));
+        return String.format("%s",printDisks(hal.getDiskStores()));
     }
 }
