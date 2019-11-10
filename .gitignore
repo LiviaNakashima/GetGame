@@ -9,6 +9,11 @@ Aplicacao/TelaLogin/target/*
 Aplicacao/TelaLogin/target/
 Aplicacao/TelaLogin/target
 
+Aplicacao/TelaLogin/target/*
+Aplicacao/TelaLogin/target/
+Aplicacao/TelaLogin/target
+
+
 # Runtime data
 pids
 *.pid
