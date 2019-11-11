@@ -18,5 +18,6 @@ getGame\Model\CPU.class
 getGame\Model\Ram.class
 getGame\Views\TelaPrincipal.class
 getGame\DAO\DiscoDAO.class
+getGame\Telegram\GetGameBot.class
 getGame\Views\Login$4.class
 getGame\Views\TelaPrincipal$4.class

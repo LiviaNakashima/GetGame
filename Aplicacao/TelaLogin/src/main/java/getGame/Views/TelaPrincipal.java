@@ -9,6 +9,7 @@ import getGame.Model.Processos;
 import getGame.Model.CPU;
 import getGame.Model.Disco;
 import getGame.Model.Ram;
+import getGame.Telegram.GetGameBot;
 import java.util.logging.Logger;
 import oshi.util.Util;
 
@@ -55,6 +56,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
                     lbProcessos.setText(String.format(processos.getProcessos()));
                     gameLog.info(String.format("Status do Servidor: cpu %s, ram %s, disco %s",
                     cpu.getCPU(), ram.getRAM(),disk.getDisco()));
+                    GetGameBot telegram = new GetGameBot();
+                    telegram.apiTelegram();
                 }
             } catch (Exception e) {
             }
