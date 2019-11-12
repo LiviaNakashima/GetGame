@@ -11,15 +11,14 @@ import java.net.URLConnection;
 
 public class GetGameBot {
 
-    public void apiTelegram() throws MalformedURLException, IOException {
-
-        String urlString = "https://api.telegram.org/bot1026640277:AAFj-j5tPswMT-X5g2zTCexbvOcMxiPG3i8/sendMessage?chat_id=-1001232076680&text=Eduardo corno";
-
+    public void apiTelegram(String valor) throws MalformedURLException, IOException {
+        String urlString = "https://api.telegram.org/bot1026640277:AAFj-j5tPswMT-X5g2zTCexbvOcMxiPG3i8/sendMessage?chat_id=-1001232076680&text="+valor;
         String apiToken = "1026640277:AAFj-j5tPswMT-X5g2zTCexbvOcMxiPG3i8";
         String chatId = "1232076680";
         String text = "Hello world!";
 
-        urlString = String.format(urlString, apiToken, chatId, text);
+        urlString = String.format(urlString, apiToken, chatId, valor);
+        System.out.println(urlString);
 
         URL url = new URL(urlString);
         URLConnection conn = url.openConnection();

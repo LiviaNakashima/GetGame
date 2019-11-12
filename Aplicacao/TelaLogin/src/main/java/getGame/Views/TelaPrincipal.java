@@ -10,9 +10,7 @@ import getGame.Model.CPU;
 import getGame.Model.Disco;
 import getGame.Model.Ram;
 import getGame.Telegram.GetGameBot;
-import java.util.Properties;
 import java.util.logging.Logger;
-import org.springframework.core.io.support.PropertiesLoaderUtils;
 import oshi.util.Util;
 
 /**
@@ -49,7 +47,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
             try {
                 Boolean verificacao = true;
                 while (verificacao) {
-                    Util.sleep(3000);
+                    Util.sleep(30);
                     lbCPU.setText(cpu.getCPU());
                     lbRAM.setText(ram.getRAM());
                     lbHD.setText(disk.getEspacoTotal().toString());
@@ -58,7 +56,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                     gameLog.info(String.format("Status do Servidor: cpu %s, ram %s, disco %s",
                     cpu.getCPU(), ram.getRAM(),disk.getDisco()));
                     GetGameBot telegram = new GetGameBot();
-                    telegram.apiTelegram();
+                    telegram.apiTelegram(disk.getEspacoTotal().toString());
                 }
             } catch (Exception e) {
             }
