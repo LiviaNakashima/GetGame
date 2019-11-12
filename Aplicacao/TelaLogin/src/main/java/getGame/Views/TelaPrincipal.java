@@ -10,7 +10,9 @@ import getGame.Model.CPU;
 import getGame.Model.Disco;
 import getGame.Model.Ram;
 import getGame.Telegram.GetGameBot;
+import java.util.Properties;
 import java.util.logging.Logger;
+import org.springframework.core.io.support.PropertiesLoaderUtils;
 import oshi.util.Util;
 
 /**
@@ -32,7 +34,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     public void setNomeUsuario(String login) {
         lbNomeUsuario.setText(login);
     }
-
     private void limparLabel() {
 
         lbCPU.setText("");

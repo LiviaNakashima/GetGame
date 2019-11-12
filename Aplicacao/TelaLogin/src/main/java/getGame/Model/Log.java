@@ -19,6 +19,6 @@ public class Log {
     public void logando() {
         Logger log = Logger.getLogger("game");
         
-        log.info("ERROR DE REGINO CORNO");
+        log.info("ERROR DE EDUARDO CORNO");
     }
 }
