@@ -17,7 +17,6 @@ public class GetGameBot {
         String chatId = "1232076680";
         String text = "Hello world!";
 
-        urlString = String.format(urlString, apiToken, chatId, valor);
         System.out.println(urlString);
 
         URL url = new URL(urlString);
