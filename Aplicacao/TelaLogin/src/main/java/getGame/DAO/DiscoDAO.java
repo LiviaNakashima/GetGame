@@ -5,15 +5,24 @@
  */
 package getGame.DAO;
 
+import getGame.Model.Disco;
+
 /**
  *
  * @author Aluno
  */
 public class DiscoDAO {
     
-    public String inserirDisco() {
-        String sql = "insert into tbStatusServidor (discoStatusServidor) VALUES (%s)";
-        return sql;
+    public static void main(String[] args) {
+        Disco disco = new Disco();
+        
+       
+        
+        System.out.println(disco.getEspacoTotal());
     }
+   // public String inserirDisco() {
+     //   String sql = "insert into tbStatusServidor (discoStatusServidor) VALUES (%s)";
+       // return sql;
+    //}
     
 }

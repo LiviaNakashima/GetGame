@@ -51,7 +51,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                     Util.sleep(3000);
                     lbCPU.setText(cpu.getCPU());
                     lbRAM.setText(ram.getRAM());
-                    lbHD.setText(disk.getDisco());
+                    lbHD.setText(disk.getEspacoTotal().toString());
                     lbProcessos.setText("");
                     lbProcessos.setText(String.format(processos.getProcessos()));
                     gameLog.info(String.format("Status do Servidor: cpu %s, ram %s, disco %s",
