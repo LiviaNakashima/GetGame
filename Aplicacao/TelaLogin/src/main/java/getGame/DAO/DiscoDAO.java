@@ -6,6 +6,8 @@
 package getGame.DAO;
 
 import getGame.Model.Disco;
+import org.apache.commons.dbcp2.BasicDataSource;
+import org.springframework.jdbc.core.JdbcTemplate;
 
 /**
  *
@@ -13,16 +15,15 @@ import getGame.Model.Disco;
  */
 public class DiscoDAO {
     
-    public static void main(String[] args) {
-        Disco disco = new Disco();
+    private JdbcTemplate jdbcTemplate;
+    
+    public void inserirDisco(String porcentagemDisco) {
+        BasicDataSource dataSource = new BasicDataSource();
+
+        jdbcTemplate = new JdbcTemplate(dataSource);
         
-       
+        jdbcTemplate.update("insert into tbStatusServidor (discoStatusServidor) VALUES (?)", porcentagemDisco);
         
-        System.out.println(disco.getEspacoTotal());
     }
-   // public String inserirDisco() {
-     //   String sql = "insert into tbStatusServidor (discoStatusServidor) VALUES (%s)";
-       // return sql;
-    //}
     
 }

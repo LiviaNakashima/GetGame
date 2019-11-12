@@ -32,11 +32,16 @@ public class Ram {
           return valorMemoriaTotal;
       }
       
-       private static String memoriaUsada(GlobalMemory memory) {
+       private static Float memoriaUsada(GlobalMemory memory) {
           String valorMemoriaUsada = "0.00";
+          String totalMemory =   FormatUtil.formatBytes(memory.getTotal()).replace("GiB", "").replace(",",".");
+          Float memoriaTotal = Float.parseFloat(totalMemory);
           String usedMemory = (FormatUtil.formatBytes(memory.getTotal() - memory.getAvailable())).replace("GiB","").replace(",",".");
+          Float memoriaUsada = Float.parseFloat(usedMemory);
+          Float porcentagemMemoriaUsada = memoriaUsada /  memoriaTotal * 100;
           valorMemoriaUsada = String.format("%s", usedMemory);
-          return valorMemoriaUsada;
+          
+          return porcentagemMemoriaUsada;
        } 
        
         private static String memoriaDisponivel(GlobalMemory memory) {
@@ -59,7 +64,7 @@ public class Ram {
         return memoriaTotal(hal.getMemory());
     }
          
-          public String getMemoriaUsada() {
+          public Float getMemoriaUsada() {
         SystemInfo si = new SystemInfo();
         HardwareAbstractionLayer hal = si.getHardware();
 

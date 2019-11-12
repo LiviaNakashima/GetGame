@@ -5,14 +5,15 @@
  */
 package getGame.Views;
 
+import getGame.DAO.StatusDAO;
 import getGame.Model.Processos;
 import getGame.Model.CPU;
 import getGame.Model.Disco;
 import getGame.Model.Ram;
 import getGame.Telegram.GetGameBot;
-import java.util.Properties;
+import java.sql.JDBCType;
+import java.time.LocalDate;
 import java.util.logging.Logger;
-import org.springframework.core.io.support.PropertiesLoaderUtils;
 import oshi.util.Util;
 
 /**
@@ -21,6 +22,7 @@ import oshi.util.Util;
  */
 public class TelaPrincipal extends javax.swing.JFrame {
 
+    StatusDAO status = new StatusDAO();
     Logger gameLog = Logger.getLogger("game");
     Ram ram = new Ram();
     Disco disk = new Disco();
@@ -49,16 +51,21 @@ public class TelaPrincipal extends javax.swing.JFrame {
             try {
                 Boolean verificacao = true;
                 while (verificacao) {
-                    Util.sleep(3000);
+                    String log = String.format("Status do Servidor: ram %s%%, disco %s%%",
+                     ram.getMemoriaUsada().toString().substring(0, 5),
+                     (disk.getEspacoUsado()+"").toString().substring(0, 5));
+                    System.out.println(log);
+                    Util.sleep(30);
                     lbCPU.setText(cpu.getCPU());
-                    lbRAM.setText(ram.getRAM());
+                    lbRAM.setText(ram.getMemoriaUsada().toString());
                     lbHD.setText(disk.getEspacoTotal().toString());
                     lbProcessos.setText("");
                     lbProcessos.setText(String.format(processos.getProcessos()));
-                    gameLog.info(String.format("Status do Servidor: cpu %s, ram %s, disco %s",
-                    cpu.getCPU(), ram.getRAM(),disk.getDisco()));
+                    gameLog.info(log);
+//                    status.inserirStatusServidor((float) 80.00, ram.getMemoriaUsada(), disk.getEspacoUsado(),
+//                            "Online", "00:00:00", 1, LocalDate.now());
                     GetGameBot telegram = new GetGameBot();
-                    telegram.apiTelegram();
+                    telegram.apiTelegram(log);
                 }
             } catch (Exception e) {
             }
