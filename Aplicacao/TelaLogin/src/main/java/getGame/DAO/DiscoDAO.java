@@ -18,7 +18,7 @@ public class DiscoDAO {
         
        
         
-        System.out.println(disco.getEspacoTotal());
+        System.out.println(disco.getEspacoUsado());
     }
    // public String inserirDisco() {
      //   String sql = "insert into tbStatusServidor (discoStatusServidor) VALUES (%s)";

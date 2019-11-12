@@ -88,6 +88,35 @@ public class Disco {
              }
              return valorEspacoTotal;
          }
+         
+         private static String espacoUsado(HWDiskStore[] diskStores) {
+             String valorUsado = "0.00";
+                 File[] roots = File.listRoots();
+                   for (File root : roots) {
+          String usedSpace = FormatUtil.formatBytes(root.getTotalSpace() - root.getUsableSpace());
+           
+          
+            valorUsado = String.format("%s", usedSpace);
+                        
+             }
+            return valorUsado;
+         }
+         
+         
+       public float getEspacoUsado() {
+           SystemInfo si = new SystemInfo();
+        HardwareAbstractionLayer hal = si.getHardware();
+        
+        espacoUsado(hal.getDiskStores());
+        espacoTotal(hal.getDiskStores());
+        
+        Float usedSpace = Float.parseFloat(String.format("%s", espacoUsado(hal.getDiskStores())).replace("GiB", "").replace(",","."));
+        Float totalSpace = Float.parseFloat(String.format("%s",espacoTotal(hal.getDiskStores())).replace("GiB", "").replace(",","."));
+        Float calculoPorcentagemEspacoUsado =  usedSpace / totalSpace * 100;
+       
+        
+        return calculoPorcentagemEspacoUsado;
+       } 
           
          public String getEspacoUtilizavel() {
         SystemInfo si = new SystemInfo();
@@ -98,12 +127,12 @@ public class Disco {
                 
          }
          
-         public Double getEspacoTotal() {
+         public Float getEspacoTotal() {
         SystemInfo si = new SystemInfo();
         HardwareAbstractionLayer hal = si.getHardware();
         
         espacoTotal(hal.getDiskStores());
-        Double spaceTotal = Double.parseDouble(String.format("%s",espacoTotal(hal.getDiskStores())).replace("GiB", "").replace(",","."));
+       Float spaceTotal = Float.parseFloat(String.format("%s",espacoTotal(hal.getDiskStores())).replace("GiB", "").replace(",","."));
         return spaceTotal;
                 
          } 

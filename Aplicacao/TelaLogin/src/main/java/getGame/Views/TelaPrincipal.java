@@ -51,7 +51,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 while (verificacao) {
                     Util.sleep(3000);
                     lbCPU.setText(cpu.getCPU());
-                    lbRAM.setText(ram.getRAM());
+                    lbRAM.setText(ram.getMemoriaUsada().toString());
                     lbHD.setText(disk.getEspacoTotal().toString());
                     lbProcessos.setText("");
                     lbProcessos.setText(String.format(processos.getProcessos()));
