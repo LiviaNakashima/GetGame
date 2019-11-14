@@ -395,15 +395,24 @@
 
         <div class="container-fluid" style="text-align: center;">
 
-          <h1 class="h3 mb-0 text-gray-800" id="lbNomeServidor">Dashboard</h1>
+          <h1 class="h3 mb-0 text-gray-800" id="lbNomeServidor" style="display: none;">Dashboard</h1>
 
           <div class="row-fluid" style="text-align:center">
-            <div class="chart-area" style="display:flex">
+            <div class="chart-area" style="display:flex; margin-top: 5%;">
               <div style= "width:500px; height: 200px">
-                <canvas style="display:none; width:500px; height: 200px" id="myHorizontalBarChart"></canvas>
+                <canvas style="display:none; width:500px; height: 200px" id="myDiskChart"></canvas>
+                <div style="display:none" id="labelDisco">Disco</div>
+
+              </div>
+              <div style= "width:500px; height: 200px">
+                <canvas style="display:none; width:500px; height: 200px" id="myRamChart"></canvas>
+                <div style="display:none" id="labelRam">Memória Ram</div>
+
               </div>
               <div style="width:500px; height: 200px">
-                <canvas style="display:none; width:500px; height: 200px" id="myAreaChart3"></canvas>
+                <canvas style="display:none; width:500px; height: 200px" id="myCpuChart"></canvas>
+                <div style="display:none" id="labelCpu">Processador</div>
+
               </div>
             </div>
           </div>
@@ -451,6 +460,13 @@
 
     <script src="js/demo/chart-pie-demo.js"></script>
 
+    <!-- CHARTS DE CPU, MEMORIA E DISCO-->
+
+    <script src="js/demo/chartRam.js"></script>
+    <script src="js/demo/chartCpu.js"></script>
+    <script src="js/demo/chartDisk.js"></script>
+
+
 </body>
 
 </html>
@@ -489,8 +505,14 @@
     $('#modalSelecionarServidor').modal('hide');
     var a = nomeServidor.selectedOptions.valueOf(nomeServidor.selectedIndex);
     lbNomeServidor.innerHTML = a.item(0).text;
-    document.getElementById('myHorizontalBarChart').style.display = 'inline';
-    document.getElementById('myAreaChart3').style.display = 'inline';
+    document.getElementById('lbNomeServidor').style.display='inline';
+    document.getElementById('myRamChart').style.display = 'inline';
+    document.getElementById('myDiskChart').style.display = 'inline';
+    document.getElementById('myCpuChart').style.display = 'inline';
+    document.getElementById('labelCpu').style.display='inline';
+    document.getElementById('labelRam').style.display='inline';
+    document.getElementById('labelDisco').style.display='inline';
+
   }
 
   $(document).ready(function () {
