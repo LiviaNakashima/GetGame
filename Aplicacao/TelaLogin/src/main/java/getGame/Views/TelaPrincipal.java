@@ -57,11 +57,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
                     System.out.println(log);
                     Util.sleep(30);
                     lbCPU.setText(cpu.getCPU());
-                    lbRAM.setText(ram.getMemoriaUsada().toString());
-                    lbHD.setText(disk.getEspacoTotal().toString());
+                    lbRAM.setText(ram.getRAM());
+                    lbHD.setText(disk.getDisco());
                     lbProcessos.setText("");
                     lbProcessos.setText(String.format(processos.getProcessos()));
-                    gameLog.info(log);
+                   gameLog.info(log);
 //                    status.inserirStatusServidor((float) 80.00, ram.getMemoriaUsada(), disk.getEspacoUsado(),
 //                            "Online", "00:00:00", 1, LocalDate.now());
                     GetGameBot telegram = new GetGameBot();

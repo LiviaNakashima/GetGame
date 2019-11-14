@@ -4,11 +4,16 @@
  * and open the template in the editor.
  */
 package getGame.DAO;
-
+import org.springframework.jdbc.core.JdbcTemplate;
 /**
  *
  * @author Aluno
  */
 public class RamDAO {
     
+        Conexao dadosConexao = new Conexao();
+        JdbcTemplate jdbcTemplate = new JdbcTemplate(dadosConexao.getDataSource());
+    
+        
+        
 }

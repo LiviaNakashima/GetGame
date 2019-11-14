@@ -15,7 +15,7 @@ public class GetGameBot {
         String urlString = "https://api.telegram.org/bot1026640277:AAFj-j5tPswMT-X5g2zTCexbvOcMxiPG3i8/sendMessage?chat_id=-1001232076680&text="+valor;
         String apiToken = "1026640277:AAFj-j5tPswMT-X5g2zTCexbvOcMxiPG3i8";
         String chatId = "1232076680";
-        String text = "Hello world!";
+        String text = "Hello world";
 
         System.out.println(urlString);
 

@@ -14,6 +14,7 @@ getGame\Views\Login$5.class
 getGame\Views\TelaPrincipal$3.class
 getGame\Model\Disco.class
 getGame\Model\Log.class
+getGame\DAO\LoginDAO.class
 getGame\DAO\StatusDAO.class
 getGame\Views\Login$1.class
 getGame\Views\Login$7.class

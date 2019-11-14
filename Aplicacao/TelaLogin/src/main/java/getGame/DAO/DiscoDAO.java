@@ -15,14 +15,20 @@ import org.springframework.jdbc.core.JdbcTemplate;
  */
 public class DiscoDAO {
     
+    Disco disco = new Disco();
+    
+    
+    
     private JdbcTemplate jdbcTemplate;
     
-    public void inserirDisco(String porcentagemDisco) {
-        BasicDataSource dataSource = new BasicDataSource();
-
-        jdbcTemplate = new JdbcTemplate(dataSource);
+    public void inserirDisco(Float calculoPorcentagemEspacoUsado) {
+    BasicDataSource dataSource = new BasicDataSource();
         
-        jdbcTemplate.update("insert into tbStatusServidor (discoStatusServidor) VALUES (?)", porcentagemDisco);
+    String insertBanco = String.format("insert into tbStatusServidor (discoStatusServidor) VALUES (%s)", disco.getEspacoUsado());
+
+       jdbcTemplate = new JdbcTemplate(dataSource);
+        
+      jdbcTemplate.update(insertBanco);
         
     }
     
