@@ -105,43 +105,42 @@ public class Disco {
          
        public float getEspacoUsado() {
            SystemInfo si = new SystemInfo();
-        HardwareAbstractionLayer hal = si.getHardware();
-        
-        espacoUsado(hal.getDiskStores());
-        espacoTotal(hal.getDiskStores());
-        
-        Float usedSpace = Float.parseFloat(String.format("%s", espacoUsado(hal.getDiskStores())).replace("GiB", "").replace(",","."));
-        Float totalSpace = Float.parseFloat(String.format("%s",espacoTotal(hal.getDiskStores())).replace("GiB", "").replace(",","."));
-        Float calculoPorcentagemEspacoUsado =  usedSpace / totalSpace * 100;
-       
-        
-        return calculoPorcentagemEspacoUsado;
+            HardwareAbstractionLayer hal = si.getHardware();
+
+            espacoUsado(hal.getDiskStores());
+            espacoTotal(hal.getDiskStores());
+
+            Float usedSpace = Float.parseFloat(String.format("%s", espacoUsado(hal.getDiskStores())).replace("GiB", "").replace(",","."));
+            Float totalSpace = Float.parseFloat(String.format("%s",espacoTotal(hal.getDiskStores())).replace("GiB", "").replace(",","."));
+            Float calculoPorcentagemEspacoUsado =  usedSpace / totalSpace * 100;
+            
+            return calculoPorcentagemEspacoUsado;
        } 
           
-         public String getEspacoUtilizavel() {
-        SystemInfo si = new SystemInfo();
-        HardwareAbstractionLayer hal = si.getHardware();
-        
-        EspacoUtilizavel(hal.getDiskStores());
-        return String.format("%s",EspacoUtilizavel(hal.getDiskStores()));
+        public String getEspacoUtilizavel() {
+            SystemInfo si = new SystemInfo();
+            HardwareAbstractionLayer hal = si.getHardware();
+
+            EspacoUtilizavel(hal.getDiskStores());
+            return String.format("%s",EspacoUtilizavel(hal.getDiskStores()));
                 
-         }
+        }
          
-         public Float getEspacoTotal() {
-        SystemInfo si = new SystemInfo();
-        HardwareAbstractionLayer hal = si.getHardware();
-        
-        espacoTotal(hal.getDiskStores());
-       Float spaceTotal = Float.parseFloat(String.format("%s",espacoTotal(hal.getDiskStores())).replace("GiB", "").replace(",","."));
-        return spaceTotal;
-                
+        public Float getEspacoTotal() {
+            SystemInfo si = new SystemInfo();
+            HardwareAbstractionLayer hal = si.getHardware();
+
+            espacoTotal(hal.getDiskStores());
+            Float spaceTotal = Float.parseFloat(String.format("%s",espacoTotal(hal.getDiskStores())).replace("GiB", "").replace(",","."));
+            
+            return spaceTotal;    
          } 
       
         public String getDisco() {
-        SystemInfo si = new SystemInfo();
-        HardwareAbstractionLayer hal = si.getHardware();
+            SystemInfo si = new SystemInfo();
+            HardwareAbstractionLayer hal = si.getHardware();
 
-        printDisks(hal.getDiskStores());
-        return String.format("%s",printDisks(hal.getDiskStores()));
-    }
+            printDisks(hal.getDiskStores());
+            return String.format("%s",printDisks(hal.getDiskStores()));
+        }
 }
