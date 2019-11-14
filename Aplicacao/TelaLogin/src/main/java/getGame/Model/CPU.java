@@ -45,20 +45,31 @@ public class CPU {
         }
 
         return (String.format("Uso do CPU: %.2f", porcentagemCPU / contador));
-
     }
     
     public String getCPU() {
         SystemInfo si = new SystemInfo();
-        HardwareAbstractionLayer hal = si.getHardware();
-
-        return String.format("<html>%s <br> %s</html>",
-                si.getHardware().getProcessor().toString(),
+        
+        return String.format("<html>%s</html>",
                 printCpu(si.getHardware().getProcessor()) + "%");
+    }
+    public String getInformacoesCPU(){
+        SystemInfo si = new SystemInfo();
         
-        
+        return String.format("<html>%s</html>",
+                si.getHardware().getProcessor().toString());
     }
     
+    public Float getCPUUsada(){
+        SystemInfo si = new SystemInfo();
+        String valor = printCpu(si.getHardware().getProcessor());
+        if(valor.length() == 16){
+            valor = valor.substring(12, 16).replace(",", ".");
+        }else{
+            valor = valor.substring(12, 17).replace(",", ".");
+        }
+        Float a = Float.parseFloat(valor);
+        return a;
+    }
    
-    
 }

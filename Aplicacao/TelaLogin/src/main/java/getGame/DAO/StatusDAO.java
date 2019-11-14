@@ -19,17 +19,27 @@ public class StatusDAO {
     
     public boolean inserirStatusServidor
         (Float cpu, Float ram, Float disco, String status, String tempoOff, Integer codServidor, LocalDate data){
-        
         BasicDataSource dataSource = new BasicDataSource();
+        Conexao conect = new Conexao();
+        
 
-        jdbcTemplate = new JdbcTemplate(dataSource);
+        jdbcTemplate = new JdbcTemplate(conect.getDataSource());
         
-        jdbcTemplate.update("insert into tbStatusServidor (cpuStatusServidor, ramStatusServidor, discoStatusServidor"
-                + " discoStatusServidor, situacaoStatusServidor, tempoOffStatusServidor, codServidor,"
-                + " dataHoraStatusServidor) VALUES (?, ?, ?, ?, ?, ?, ?)", 
-                cpu, ram, disco, status, tempoOff, codServidor, data);
-        
-        return false;
+//        String insercao = String.format("insert into tbStatusServidor values(%.2f, %.2f, %.2f, '%s', '%s', %d, '%s');", 
+//                cpu, ram, disco
+//                , status, tempoOff, codServidor, data);
+//        
+//        System.out.println(insercao);
+//        jdbcTemplate.execute(insercao);
+        try {
+            jdbcTemplate.update("insert into tbStatusServidor(cpuStatusServidor, ramStatusServidor, discoStatusServidor, situacaoStatusServidor, tempoOffStatusServidor, codServidor, dataHoraStatusServidor)"
+                                + "values(?, ?, ?, ?, ?, ?, ?)", 
+                    cpu.toString().replace(",", ".").substring(0, 5), ram.toString().replace(",", ".").substring(0, 5), 
+                    disco.toString().replace(",", ".").substring(0, 5), status, tempoOff, codServidor, data);
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return true;
     }
 
     
