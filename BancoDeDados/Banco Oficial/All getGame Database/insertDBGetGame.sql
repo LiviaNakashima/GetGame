@@ -18,7 +18,7 @@ values
 
 insert into tbProcessoServidor
 values
-('windows', 45,32,1);
+('windows',1);
 
 select * from tbUsuario;
 select * from tbServidor;
