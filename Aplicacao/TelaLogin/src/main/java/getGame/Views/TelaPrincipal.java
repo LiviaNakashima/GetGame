@@ -9,6 +9,7 @@ import getGame.DAO.StatusDAO;
 import getGame.Model.Processos;
 import getGame.Model.CPU;
 import getGame.Model.Disco;
+import getGame.Model.GeracaoLog;
 import getGame.Model.Ram;
 import getGame.Telegram.GetGameBot;
 import java.sql.JDBCType;
@@ -22,6 +23,7 @@ import oshi.util.Util;
  */
 public class TelaPrincipal extends javax.swing.JFrame {
 
+    GeracaoLog geracaoLog = new GeracaoLog();
     StatusDAO status = new StatusDAO();
     Logger gameLog = Logger.getLogger("game");
     Ram ram = new Ram();
@@ -51,10 +53,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
             try {
                 Boolean verificacao = true;
                 while (verificacao) {
+                 //   geracaoLog.gerarArquivoTxt();
                     String log = String.format("Status do Servidor: ram %s%%, disco %s%%",
                      ram.getMemoriaUsada().toString().substring(0, 5),
                      (disk.getEspacoUsado()+"").toString().substring(0, 5));
                     System.out.println(log);
+                    System.out.println(geracaoLog.escreveArquivo(log));
                     Util.sleep(30);
                     lbCPU.setText(cpu.getCPU());
                     lbRAM.setText(ram.getRAM());
@@ -62,10 +66,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
                     lbProcessos.setText("");
                     lbProcessos.setText(String.format(processos.getProcessos()));
                    gameLog.info(log);
-//                    status.inserirStatusServidor((float) 80.00, ram.getMemoriaUsada(), disk.getEspacoUsado(),
-//                            "Online", "00:00:00", 1, LocalDate.now());
+           //        status.inserirStatusServidor((float) 80.00, ram.getMemoriaUsada(), disk.getEspacoUsado(),
+            //               "Online", "00:00:00", 1, LocalDate.now());
                     GetGameBot telegram = new GetGameBot();
                     telegram.apiTelegram(log);
+                    
                 }
             } catch (Exception e) {
             }

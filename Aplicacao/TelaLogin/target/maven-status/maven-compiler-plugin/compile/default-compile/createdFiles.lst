@@ -11,6 +11,7 @@ getGame\Telegram\GetGameBot.class
 getGame\Model\Processos.class
 getGame\Views\TelaPrincipal$5.class
 getGame\Views\Login$5.class
+getGame\Model\GeracaoLog.class
 getGame\Views\TelaPrincipal$3.class
 getGame\Model\Disco.class
 getGame\Model\Log.class
