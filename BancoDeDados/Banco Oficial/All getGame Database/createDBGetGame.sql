@@ -33,8 +33,6 @@ create table tbStatusServidor (
 create table tbProcessoServidor (
 	  codProcessoServidor int primary key identity(1,1),
 	  nomeProcessoServidor varchar(100) not null,
-	  cpuProcessoServidor float not null,
-	  ramProcessoServidor float not null,
 	  codServidor int foreign key (codServidor) references tbServidor (codServidor))
 ;
 

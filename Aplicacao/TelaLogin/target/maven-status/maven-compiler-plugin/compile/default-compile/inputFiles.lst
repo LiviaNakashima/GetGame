@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 C:\Users\Aluno\Desktop\GetGame\Aplicacao\TelaLogin\src\main\java\getGame\DAO\Conexao.java
 C:\Users\Aluno\Desktop\GetGame\Aplicacao\TelaLogin\src\main\java\getGame\Model\Disco.java
 C:\Users\Aluno\Desktop\GetGame\Aplicacao\TelaLogin\src\main\java\getGame\Telegram\GetGameBot.java
@@ -13,3 +14,19 @@ C:\Users\Aluno\Desktop\GetGame\Aplicacao\TelaLogin\src\main\java\getGame\Model\G
 C:\Users\Aluno\Desktop\GetGame\Aplicacao\TelaLogin\src\main\java\getGame\Views\TelaPrincipal.java
 C:\Users\Aluno\Desktop\GetGame\Aplicacao\TelaLogin\src\main\java\getGame\Model\Processos.java
 C:\Users\Aluno\Desktop\GetGame\Aplicacao\TelaLogin\src\main\java\getGame\Model\Ram.java
+=======
+D:\Faculdade\PI\GetGame\Aplicacao\TelaLogin\src\main\java\getGame\DAO\StatusDAO.java
+D:\Faculdade\PI\GetGame\Aplicacao\TelaLogin\src\main\java\getGame\Views\Login.java
+D:\Faculdade\PI\GetGame\Aplicacao\TelaLogin\src\main\java\getGame\DAO\Conexao.java
+D:\Faculdade\PI\GetGame\Aplicacao\TelaLogin\src\main\java\getGame\DAO\RamDAO.java
+D:\Faculdade\PI\GetGame\Aplicacao\TelaLogin\src\main\java\getGame\Model\Disco.java
+D:\Faculdade\PI\GetGame\Aplicacao\TelaLogin\src\main\java\getGame\Views\TelaPrincipal.java
+D:\Faculdade\PI\GetGame\Aplicacao\TelaLogin\src\main\java\getGame\Model\CPU.java
+D:\Faculdade\PI\GetGame\Aplicacao\TelaLogin\src\main\java\getGame\Telegram\GetGameBot.java
+D:\Faculdade\PI\GetGame\Aplicacao\TelaLogin\src\main\java\getGame\DAO\DiscoDAO.java
+D:\Faculdade\PI\GetGame\Aplicacao\TelaLogin\src\main\java\getGame\Model\Processos.java
+D:\Faculdade\PI\GetGame\Aplicacao\TelaLogin\src\main\java\getGame\Model\Log.java
+D:\Faculdade\PI\GetGame\Aplicacao\TelaLogin\src\main\java\getGame\Model\Ram.java
+D:\Faculdade\PI\GetGame\Aplicacao\TelaLogin\src\main\java\getGame\DAO\CpuDAO.java
+D:\Faculdade\PI\GetGame\Aplicacao\TelaLogin\src\main\java\getGame\DAO\LoginDAO.java
+>>>>>>> 839ec4a2c415ea46b01a9c17211ab29995ed473b

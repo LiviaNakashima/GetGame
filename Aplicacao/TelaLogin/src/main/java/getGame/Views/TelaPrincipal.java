@@ -53,24 +53,44 @@ public class TelaPrincipal extends javax.swing.JFrame {
             try {
                 Boolean verificacao = true;
                 while (verificacao) {
+<<<<<<< HEAD
                  //   geracaoLog.gerarArquivoTxt();
                     String log = String.format("Status do Servidor: ram %s%%, disco %s%%",
                      ram.getMemoriaUsada().toString().substring(0, 5),
                      (disk.getEspacoUsado()+"").toString().substring(0, 5));
                     System.out.println(log);
                     System.out.println(geracaoLog.escreveArquivo(log));
+=======
+                    System.out.println("TO ENTRANDO AQUI NO MAIN");
+                    if(cpu.getCPUUsada() > 70 || ram.getMemoriaUsada() > 70 || disk.getEspacoUsado() > 70){
+                        String log = String.format("Status do Servidor: cpu %s%%, ram %s%%, disco %s%%",
+                         cpu.getCPUUsada().toString(),
+                         ram.getMemoriaUsada().toString().substring(0, 5),
+                         (disk.getEspacoUsado()+"").toString().substring(0, 5));
+                        gameLog.info(log);
+                        GetGameBot telegram = new GetGameBot();
+                        telegram.apiTelegram(log);
+                    }
+>>>>>>> 839ec4a2c415ea46b01a9c17211ab29995ed473b
                     Util.sleep(30);
                     lbCPU.setText(cpu.getCPU());
                     lbRAM.setText(ram.getRAM());
                     lbHD.setText(disk.getDisco());
                     lbProcessos.setText("");
+                    System.out.println(LocalDate.now());
                     lbProcessos.setText(String.format(processos.getProcessos()));
+<<<<<<< HEAD
                    gameLog.info(log);
            //        status.inserirStatusServidor((float) 80.00, ram.getMemoriaUsada(), disk.getEspacoUsado(),
             //               "Online", "00:00:00", 1, LocalDate.now());
                     GetGameBot telegram = new GetGameBot();
                     telegram.apiTelegram(log);
                     
+=======
+                    status.inserirStatusServidor(cpu.getCPUUsada(), ram.getMemoriaUsada(), disk.getEspacoUsado(),
+                            "on", "00:00:00", 1, LocalDate.now());
+                    System.out.println("GRAVOU CARALHOOOOOO");
+>>>>>>> 839ec4a2c415ea46b01a9c17211ab29995ed473b
                 }
             } catch (Exception e) {
             }

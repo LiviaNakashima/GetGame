@@ -78,12 +78,7 @@
         sessionStorage.nome = resposta.nomeUsuario;
         sessionStorage.permissao = resposta.permissaoUsuario;
         verificarAutenticacao();
-
-        Swal.fire({
-                        title: "Sucesso",
-                        text: "Login realizado com sucesso!",
-                        type: "success"
-                    })  .then(willDelete => {
+        then(willDelete => {
                         window.location.href = 'views/index.html';
                     });
       

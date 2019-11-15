@@ -45,7 +45,6 @@ public class CPU {
         }
 
         return (String.format("Uso do CPU: %.2f", porcentagemCPU / contador));
-
     }
     
         private static String print(CentralProcessor processor) {
@@ -82,14 +81,34 @@ public class CPU {
     
     public String getCPU() {
         SystemInfo si = new SystemInfo();
+<<<<<<< HEAD
 
         return String.format("<html>%s <br> %s</html>",
                 si.getHardware().getProcessor().toString(),
                 printCpu(si.getHardware().getProcessor()) + "%");
+=======
+>>>>>>> 839ec4a2c415ea46b01a9c17211ab29995ed473b
         
+        return String.format("<html>%s</html>",
+                printCpu(si.getHardware().getProcessor()) + "%");
+    }
+    public String getInformacoesCPU(){
+        SystemInfo si = new SystemInfo();
         
+        return String.format("<html>%s</html>",
+                si.getHardware().getProcessor().toString());
     }
     
+    public Float getCPUUsada(){
+        SystemInfo si = new SystemInfo();
+        String valor = printCpu(si.getHardware().getProcessor());
+        if(valor.length() == 16){
+            valor = valor.substring(12, 16).replace(",", ".");
+        }else{
+            valor = valor.substring(12, 17).replace(",", ".");
+        }
+        Float a = Float.parseFloat(valor);
+        return a;
+    }
    
-    
 }
