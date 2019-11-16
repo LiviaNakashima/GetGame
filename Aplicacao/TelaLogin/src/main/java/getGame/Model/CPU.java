@@ -83,11 +83,11 @@ public class CPU {
         SystemInfo si = new SystemInfo();
 
 
-   //     return String.format("<html>%s <br> %s</html>",
-     //           si.getHardware().getProcessor().toString(),
-       //         printCpu(si.getHardware().getProcessor()) + "%");
+        return String.format("<html>%s <br> %s</html>",
+                si.getHardware().getProcessor().toString(),
+                printCpu(si.getHardware().getProcessor()) + "%");
         
-     return String.format("<html>%s</html>", printCpu(si.getHardware().getProcessor()) + "%");
+    // return String.format("<html>%s</html>", printCpu(si.getHardware().getProcessor()) + "%");
     }
     
     public String getInformacoesCPU(){

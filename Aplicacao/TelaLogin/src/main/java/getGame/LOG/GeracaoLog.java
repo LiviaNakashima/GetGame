@@ -5,9 +5,13 @@
  */
 package getGame.LOG;
 
+import getGame.Model.CPU;
+import getGame.Model.Disco;
+import getGame.Model.Ram;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.io.PrintWriter;
 
 /**
  *
@@ -15,28 +19,38 @@ import java.io.IOException;
  */
 public class GeracaoLog {
     
-    public boolean gerarPasta() {
+    public boolean gerarPasta() throws IOException {
        
-        File pasta = new File("C:\\getGameLogs\\");
+        File pasta = new File("C:\\getGameLogs2\\");
         
        boolean pastaCriada = pasta.mkdir();
        
-        System.out.println(pastaCriada);
+       File arquivo = new File("C:\\getGameLogs2\\log.txt");
        
-       return pastaCriada;
+       boolean arquivoCriado = arquivo.createNewFile();
+       
+       return arquivoCriado;
+         
+    }
+    
+    public PrintWriter escritaArquivo() throws IOException{
+      
+        Disco disco = new Disco();
+        Ram ram = new Ram();
+        CPU cpu = new CPU();
+        DataHora dataHora = new DataHora();
+        
+          
+      PrintWriter editarArquivo = new PrintWriter("C:\\getGameLogs2\\log.txt");
+      
+      String formatacaoTexto = String.format("%s | Disco: %s | Memória RAM: %s | Uso de CPU: %.2f " , dataHora.gerarDataHora(), disco.getDisco(), ram.getRAMFormatado(), cpu.getCPUUsada());
+      
+      editarArquivo.printf(formatacaoTexto);
+      
+      editarArquivo.close();
+      
+      return editarArquivo;
         
     }
 
-public boolean gerarArquivoTXT() throws IOException {
-    
-    
-    
-    File arquivo = new File("C:\\getGameLogs\\teste.txt");
-    
-    boolean arquivoTXT = arquivo.createNewFile();
-    
-    return arquivoTXT;
-    
-}    
-    
 }

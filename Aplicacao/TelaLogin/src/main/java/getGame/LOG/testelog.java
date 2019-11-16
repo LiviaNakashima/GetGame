@@ -5,6 +5,7 @@
  */
 package getGame.LOG;
 
+import getGame.Model.Disco;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
@@ -18,8 +19,16 @@ public class testelog {
            
         GeracaoLog geracao = new GeracaoLog();
         
-        geracao.gerarPasta();
-        geracao.gerarArquivoTXT();
+        DataHora datahora = new DataHora();
+        
+   geracao.gerarPasta();
+ 
+   geracao.escritaArquivo();
+     
+   
+        System.out.println(geracao.gerarPasta());
+        System.out.println(datahora.gerarDataHora());
+        
 
     }
 }

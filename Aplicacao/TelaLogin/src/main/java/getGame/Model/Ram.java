@@ -16,7 +16,13 @@ import oshi.util.FormatUtil;
  */
 public class Ram {
     
-       
+        
+    private static String printMemoryFormatado(GlobalMemory memory) {
+
+        return String.format("Total: %s | Disponível: %s",
+                FormatUtil.formatBytes(memory.getTotal()),
+                FormatUtil.formatBytes(memory.getAvailable()));
+    }
     
     private static String printMemory(GlobalMemory memory) {
 
@@ -78,6 +84,13 @@ public class Ram {
         return memoriaDisponivel(hal.getMemory());
     }
           
+   public String getRAMFormatado() {
+         SystemInfo si = new SystemInfo();
+        HardwareAbstractionLayer hal = si.getHardware();
+
+        return printMemoryFormatado(hal.getMemory());
+   }
+           
     public String getRAM() {
         SystemInfo si = new SystemInfo();
         HardwareAbstractionLayer hal = si.getHardware();
