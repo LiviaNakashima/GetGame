@@ -9,7 +9,6 @@ import getGame.Model.CPU;
 import getGame.Model.Disco;
 import getGame.Model.Ram;
 import java.io.File;
-import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.concurrent.TimeUnit;

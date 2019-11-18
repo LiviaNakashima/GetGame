@@ -19,7 +19,7 @@ public class DataHora {
     
             Date data = GregorianCalendar.getInstance().getTime();
           //  SimpleDateFormat format = new SimpleDateFormat();
-            
+            data.setHours(data.getHours()-1);
             String dataHora = String.format("%s ", data );
             
             return dataHora;

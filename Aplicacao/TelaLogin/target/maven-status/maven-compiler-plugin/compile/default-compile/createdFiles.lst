@@ -1,12 +1,10 @@
-getGame\DAO\CpuDAO.class
 getGame\Views\Login.class
+getGame\LOG\DataHora.class
 getGame\Views\Login$2.class
 getGame\DAO\Conexao.class
 getGame\Views\Login$6.class
 getGame\Views\TelaPrincipal$2.class
-getGame\DAO\RamDAO.class
 getGame\Views\Login$3.class
-getGame\DAO\DiscoDAO.class
 getGame\Telegram\GetGameBot.class
 getGame\Model\Processos.class
 getGame\Views\TelaPrincipal$5.class
@@ -20,6 +18,8 @@ getGame\DAO\StatusDAO.class
 getGame\Views\Login$1.class
 getGame\Views\Login$7.class
 getGame\Views\TelaPrincipal$1.class
+getGame\LOG\GeracaoLog.class
+getGame\LOG\testelog.class
 getGame\Model\CPU.class
 getGame\Model\Ram.class
 getGame\Views\TelaPrincipal.class
