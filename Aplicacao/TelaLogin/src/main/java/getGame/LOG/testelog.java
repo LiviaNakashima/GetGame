@@ -9,14 +9,19 @@ import getGame.Model.Disco;
 import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
+import java.time.LocalDate;
 
 /**
  *
  * @author Guilherme
  */
 public class testelog {
-    public static void main(String[] args) throws IOException {
+    public static void main(String[] args) throws IOException, InterruptedException {
            
+        LocalDate date = LocalDate.now();
+        
+        System.out.println(date);
+        
         GeracaoLog geracao = new GeracaoLog();
         
         DataHora datahora = new DataHora();

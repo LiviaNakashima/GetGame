@@ -12,6 +12,7 @@ import java.io.File;
 import java.io.FileWriter;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.concurrent.TimeUnit;
 
 /**
  *
@@ -33,8 +34,10 @@ public class GeracaoLog {
          
     }
     
-    public PrintWriter escritaArquivo() throws IOException{
-      
+    public PrintWriter escritaArquivo() throws IOException, InterruptedException{
+       
+        
+        int i;
         Disco disco = new Disco();
         Ram ram = new Ram();
         CPU cpu = new CPU();
@@ -43,9 +46,25 @@ public class GeracaoLog {
           
       PrintWriter editarArquivo = new PrintWriter("C:\\getGameLogs2\\log.txt");
       
-      String formatacaoTexto = String.format("%s | Disco: %s | Memória RAM: %s | Uso de CPU: %.2f " , dataHora.gerarDataHora(), disco.getDisco(), ram.getRAMFormatado(), cpu.getCPUUsada());
+     // String formatacaoTexto = String.format("%s | Disco: %s | Memória RAM: %s | Uso de CPU: %.2f " , dataHora.gerarDataHora(), disco.getDisco(), ram.getRAMFormatado(), cpu.getCPUUsada());
       
-      editarArquivo.printf(formatacaoTexto);
+     // editarArquivo.printf(formatacaoTexto);
+      
+     // editarArquivo.close();
+        
+     
+      for (i=1; i<=5; i++, TimeUnit.SECONDS.sleep(6)) {
+       
+          
+          
+           String formatacaoTexto = String.format("%s | Disco: %s | Memória RAM: %s | Uso de CPU: %.2f " , dataHora.gerarDataHora(), disco.getDisco(), ram.getRAMFormatado(), cpu.getCPUUsada());
+            
+            editarArquivo.println("");
+            editarArquivo.println(formatacaoTexto);
+          
+            
+            
+      }
       
       editarArquivo.close();
       
