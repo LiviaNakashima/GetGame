@@ -1,17 +1,23 @@
-let ramObtida=81;
+let ramIndisponivel=81;
+let ramDisponivel = 100 - ramIndisponivel;
 let corInicial =  "#1cc88a";
 let corCritico = "#e74a3b";
 
 let corDisponivel = "#d19532";
 let corIndisponivel = "#858796";
 
-if(ramObtida>80){
+if(ramIndisponivel>80){
   corDisponivel = corCritico;
 } else {
   corDisponivel = corInicial;
 }
 
-// Set new default font family and font color to mimic Bootstrap's default styling
+function atualizarGrafico() {
+  obterDadosGrafico();
+  obterDadosGrafico2();
+  setTimeout(atualizarGrafico, 3000);
+}
+
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#858796';
 
@@ -22,7 +28,7 @@ var myRamChart = new Chart(ctx, {
   data: {
     labels: ["Disponível", "Indisponível"],
     datasets: [{
-      data: [10, 90],
+      data: [ramDisponivel, ramIndisponivel],
       backgroundColor: [corDisponivel, corIndisponivel]
     }],
   },
@@ -44,5 +50,3 @@ var myRamChart = new Chart(ctx, {
     cutoutPercentage: 70,
   },
 });
-
-
