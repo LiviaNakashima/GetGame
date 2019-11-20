@@ -11,27 +11,30 @@ import java.time.LocalDate;
 
 /**
  *
- * @author Guilherme
+ * @author Guilherme|
  */
 public class testelog {
     public static void main(String[] args) throws IOException, InterruptedException {
-           
-        LocalDate date = LocalDate.now();
+         
+     //   TesteDeNovo teste = new TesteDeNovo();
         
-        System.out.println(date);
+      //  LocalDate date = LocalDate.now();
+        
+       // System.out.println(date);
         
         GeracaoLog geracao = new GeracaoLog();
         
-        DataHora datahora = new DataHora();
+       // DataHora datahora = new DataHora();
         
-   geracao.gerarPasta();
+  geracao.gerarPasta();
  
    geracao.escritaArquivo();
-     
    
-        System.out.println(geracao.gerarPasta());
-        System.out.println(datahora.gerarDataHora());
-        
+   
+     //   System.out.println(geracao.gerarPasta());
+       // System.out.println(datahora.gerarDataHora());
+      
+      // teste.TesteDeNovo();
 
     }
 }

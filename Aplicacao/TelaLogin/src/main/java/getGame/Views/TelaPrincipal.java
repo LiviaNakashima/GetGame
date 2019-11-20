@@ -6,10 +6,10 @@
 package getGame.Views;
 
 import getGame.DAO.StatusDAO;
+import getGame.LOG.GeracaoLog;
 import getGame.Model.Processos;
 import getGame.Model.CPU;
 import getGame.Model.Disco;
-import getGame.Model.GeracaoLog;
 import getGame.Model.Ram;
 import getGame.Telegram.GetGameBot;
 import java.sql.JDBCType;
@@ -54,12 +54,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 Boolean verificacao = true;
                 while (verificacao) {
 
+              
+                    
                  //   geracaoLog.gerarArquivoTxt();
                     String log = String.format("Status do Servidor: ram %s%%, disco %s%%",
                      ram.getMemoriaUsada().toString().substring(0, 5),
                      (disk.getEspacoUsado()+"").toString().substring(0, 5));
                     System.out.println(log);
-                    System.out.println(geracaoLog.escreveArquivo(log));
+
                     System.out.println("TO ENTRANDO AQUI NO MAIN");
                     if(cpu.getCPUUsada() > 70 || ram.getMemoriaUsada() > 70 || disk.getEspacoUsado() > 70) {
                         String log1 = String.format("Status do Servidor: cpu %s%%, ram %s%%, disco %s%%",
@@ -88,7 +90,10 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
                     status.inserirStatusServidor(cpu.getCPUUsada(), ram.getMemoriaUsada(), disk.getEspacoUsado(),
                             "on", "00:00:00", 1, LocalDate.now());
-                    System.out.println("GRAVOU CARALHOOOOOO");
+                    
+                       geracaoLog.gerarPasta();
+                    geracaoLog.escritaArquivo();
+                   
 
                 }
             } catch (Exception e) {
