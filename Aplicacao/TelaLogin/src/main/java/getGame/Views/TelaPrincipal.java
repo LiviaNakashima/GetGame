@@ -12,7 +12,6 @@ import getGame.Model.CPU;
 import getGame.Model.Disco;
 import getGame.Model.Ram;
 import getGame.Telegram.GetGameBot;
-import java.sql.JDBCType;
 import java.time.LocalDate;
 import java.util.logging.Logger;
 import oshi.util.Util;
@@ -30,6 +29,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
     Disco disk = new Disco();
     CPU cpu = new CPU();
     Processos processos = new Processos();
+    Thread logTxt = new Thread();
+    String log, log1;
 
     public TelaPrincipal() {
         initComponents();
@@ -39,7 +40,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
         lbNomeUsuario.setText(login);
     }
     private void limparLabel() {
-
         lbCPU.setText("");
         lbHD.setText("");
         lbRAM.setText("");
@@ -54,52 +54,72 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 Boolean verificacao = true;
                 while (verificacao) {
 
-              
-                    
-                 //   geracaoLog.gerarArquivoTxt();
-                    String log = String.format("Status do Servidor: ram %s%%, disco %s%%",
+                    log = String.format("Status do Servidor: cpu %s%%, ram %s%%, disco %s%%",
+                     cpu.getCPUUsada().toString(),
                      ram.getMemoriaUsada().toString().substring(0, 5),
-                     (disk.getEspacoUsado()+"").toString().substring(0, 5));
-                    System.out.println(log);
+                     (disk.getEspacoUsado()+"").substring(0, 5));
+                    log1 = log;
 
-                    System.out.println("TO ENTRANDO AQUI NO MAIN");
-                    if(cpu.getCPUUsada() > 70 || ram.getMemoriaUsada() > 70 || disk.getEspacoUsado() > 70) {
-                        String log1 = String.format("Status do Servidor: cpu %s%%, ram %s%%, disco %s%%",
-                         cpu.getCPUUsada().toString(),
-                         ram.getMemoriaUsada().toString().substring(0, 5),
-                         (disk.getEspacoUsado()+"").toString().substring(0, 5));
-                        gameLog.info(log);
-                        GetGameBot telegram = new GetGameBot();
-                        telegram.apiTelegram(log1);
-                    }
-
-                    Util.sleep(30);
                     lbCPU.setText(cpu.getCPU());
                     lbRAM.setText(ram.getRAM());
                     lbHD.setText(disk.getDisco());
-                    lbProcessos.setText("");
-                    System.out.println(LocalDate.now());
-                    lbProcessos.setText(String.format(processos.getProcessos()));
-
-                   gameLog.info(log);
-           //        status.inserirStatusServidor((float) 80.00, ram.getMemoriaUsada(), disk.getEspacoUsado(),
-            //               "Online", "00:00:00", 1, LocalDate.now());
-                    GetGameBot telegram = new GetGameBot();
-                    telegram.apiTelegram(log);
                     
-
-                    status.inserirStatusServidor(cpu.getCPUUsada(), ram.getMemoriaUsada(), disk.getEspacoUsado(),
-                            "on", "00:00:00", 1, LocalDate.now());
-                    
-                       geracaoLog.gerarPasta();
-                    geracaoLog.escritaArquivo();
-                   
-
+                    new Thread(gravarBanco).start();
+                    new Thread(chamarTelegram).start();
+                    new Thread(registrarLogLocal).start();
+                    new Thread(listarProcessos).start();
+                    System.gc();
+                    Util.sleep(5000);
                 }
             } catch (Exception e) {
             }
         }
     };
+    
+    private Runnable registrarLogLocal = new Runnable() {
+        public void run() {
+            try{
+                geracaoLog.gerarPasta();
+                geracaoLog.escritaArquivo(log);
+            } catch (Exception e){}
+ 
+        }
+    };
+    
+    private Runnable listarProcessos = new Runnable() {
+        public void run() {
+            try{
+                lbProcessos.setText("");
+                lbProcessos.setText(String.format(processos.getProcessos()));
+            } catch (Exception e){}
+ 
+        }
+    };
+
+    private Runnable chamarTelegram = new Runnable() {
+        public void run() {
+            try{
+                if(cpu.getCPUUsada() > 70 || ram.getMemoriaUsada() > 70 || disk.getEspacoUsado() > 70) {
+                    gameLog.info(log1);
+                    GetGameBot telegram = new GetGameBot();
+                    telegram.apiTelegram(log1);
+                }
+            } catch (Exception e){}
+ 
+        }
+    };
+    
+    private Runnable gravarBanco = new Runnable() {
+        public void run() {
+            try{
+                Util.sleep(25000);
+                status.inserirStatusServidor(cpu.getCPUUsada(), ram.getMemoriaUsada(), disk.getEspacoUsado(),
+                            "on", "00:00:00", 1, LocalDate.now());
+            } catch (Exception e){}
+ 
+        }
+    };
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
