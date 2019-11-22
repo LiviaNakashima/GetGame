@@ -13,7 +13,9 @@ router.get('/ListarRam', function (req, res, next) {
   };
 
   banco.conectar().then(() => {
-    return banco.sql.query(`select top(1) ramStatusServidor as ramAtual from tbStatusServidor where codServidor = (select codServidor from tbServidor where codServidor = 1)`);
+    return banco.sql.query(`select top(1) ramStatusServidor as ramAtual from tbStatusServidor 
+    where codServidor = (select codServidor from tbServidor where codServidor = 1) 
+    ORDER BY ramStatusServidor DESC;`);
   }).then(consulta => {
     leituraRam.ramAtual = consulta.recordset[0].ramAtual;
     leituraRam.ramLivre = 100 - Number(consulta.recordset[0].ramAtual);

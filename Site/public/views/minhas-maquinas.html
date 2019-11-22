@@ -22,7 +22,7 @@
 
 </head>
 
-<body id="page-top" onload="atualizarGrafico()">
+<body id="page-top">
 
   <!-- Page Wrapper -->
   <div id="wrapper">
@@ -372,7 +372,7 @@
     document.getElementById('labelCpu').style.display = 'inline';
     document.getElementById('labelRam').style.display = 'inline';
     document.getElementById('labelDisco').style.display = 'inline';
-
+    atualizarGrafico();
   }
 
   $(document).ready(function () {
@@ -451,6 +451,7 @@
             document.getElementById(`nomeServidor`).innerHTML += conteudo;
           }
         });
+        
       } else {
         console.log("Error!!");
       }

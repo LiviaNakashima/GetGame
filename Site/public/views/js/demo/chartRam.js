@@ -16,8 +16,9 @@ if (ramIndisponivel > 80) {
 }
 
 function atualizarGrafico() {
-  obterDadosGrafico();
   setTimeout(atualizarGrafico, 3000);
+  stop(3000);
+  setInterval(obterDadosGrafico(), 3000);
 }
 
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
