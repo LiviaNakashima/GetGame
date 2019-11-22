@@ -1,10 +1,13 @@
-let ramIndisponivel = 81;
-let ramDisponivel = 100 - ramIndisponivel;
+let ramIndisponivel = 0;
+let ramDisponivel = 0;
 let corInicial = "#1cc88a";
 let corCritico = "#e74a3b";
 
 let corDisponivel = "#d19532";
 let corIndisponivel = "#858796";
+
+var exibiu_grafico = false;
+
 
 if (ramIndisponivel > 80) {
   corDisponivel = corCritico;
@@ -20,11 +23,11 @@ function atualizarGrafico() {
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#858796';
 
-var exibiu_grafico = false;
 
 function configurarGrafico() {
   var configuracoes = {
     maintainAspectRatio: false,
+    animation: exibiu_grafico ? false : {duration: 1500},
     tooltips: {
       backgroundColor: "rgb(255,255,255)",
       bodyFontColor: "#858796",
@@ -51,10 +54,10 @@ function obterDadosGrafico() {
   var dados = {
 
     datasets: [{
-      labels: ["Disponível"],
-      data: [],
+      data: [ramDisponivel,ramIndisponivel],
       backgroundColor: [corDisponivel]
-    }]
+    }],
+    labels: ["Utilizado","Disponível"]
   };
 
   fetch(`/ram/ListarRam`, { method: "GET" }).then(function (response) {
@@ -73,7 +76,9 @@ function obterDadosGrafico() {
           // dos atributos que vem no JSON 
           // que gerou na consulta ao banco de dados
 
-          dados.datasets[0].data.push(registro.ramAtual);
+          //dados.datasets[0].data.push(registro.ramAtual);
+          ramDisponivel = registro.ramAtual;
+          ramIndisponivel = 100 - ramDisponivel;
         }
         console.log(JSON.stringify(dados));
 
