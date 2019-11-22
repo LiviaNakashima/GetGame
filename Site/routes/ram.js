@@ -36,7 +36,7 @@ router.get('/ListarRam', function (req, res, next) {
     banco.sql.close();
   });
 
-});
+}); 
 
 
 
