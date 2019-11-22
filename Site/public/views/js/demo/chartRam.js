@@ -3,20 +3,14 @@ let ramDisponivel = 0;
 let corInicial = "#1cc88a";
 let corCritico = "#e74a3b";
 
-let corDisponivel = "#d19532";
+let corDisponivel = "#1cc88a";
 let corIndisponivel = "#858796";
 
 var exibiu_grafico = false;
 
 
-if (ramIndisponivel > 80) {
-  corDisponivel = corCritico;
-} else {
-  corDisponivel = corInicial;
-}
-
-function atualizarGrafico() {
-  setTimeout(atualizarGrafico, 3000);
+function atualizarGraficoRam() {
+  setTimeout(atualizarGraficoRam, 3000);
   stop(3000);
   setInterval(obterDadosGrafico(), 3000);
 }
@@ -55,13 +49,13 @@ function obterDadosGrafico() {
   var dados = {
 
     datasets: [{
-      data: [ramDisponivel,ramIndisponivel],
-      backgroundColor: [corDisponivel]
+      data: [ramIndisponivel,ramDisponivel],
+      backgroundColor: [corIndisponivel,corDisponivel]
     }],
     labels: ["Utilizado","Disponível"]
   };
 
-  fetch(`/ram/ListarRam`, { method: "GET" }).then(function (response) {
+  fetch(`/hardware/ListarDados`, { method: "GET" }).then(function (response) {
 
     if (response.ok) {
       response.json().then(function (resposta) {
@@ -78,8 +72,13 @@ function obterDadosGrafico() {
           // que gerou na consulta ao banco de dados
 
           //dados.datasets[0].data.push(registro.ramAtual);
-          ramDisponivel = registro.ramAtual;
-          ramIndisponivel = 100 - ramDisponivel;
+          ramIndisponivel = parseFloat(registro.ramAtual).toFixed(2);
+          ramDisponivel = parseFloat(100 - ramIndisponivel).toFixed(2);
+          if (ramDisponivel <= 20) {
+            corDisponivel = corCritico;
+          } else {
+            corDisponivel = corInicial;
+          }
         }
         console.log(JSON.stringify(dados));
 

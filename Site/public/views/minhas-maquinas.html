@@ -257,25 +257,28 @@
 
           <h1 class="h3 mb-0 text-gray-800" id="lbNomeServidor" style="display: none;">Dashboard</h1>
 
-          <div class="row-fluid" style="text-align:center"></div>
+          <div class="row-fluid mb-0" style="text-align:center">
             <div class="chart-area" style="display:flex; margin-top: 5%;">
-              <div class="container" style="width:500px; height: 200px">
+              <div class="container-fluid" style="width:500px; height: 200px">
                 <canvas style="display:none; width:500px; height: 200px" id="myDiskChart"></canvas>
                 <div style="display:none" id="labelDisco">Disco</div>
 
               </div>
-              <div class="container" style="width:500px; height: 200px">
+              <div class="container-fluid" style="width:500px; height: 200px">
                 <canvas style="display:none; width:500px; height: 200px" id="myRamChart"></canvas>
                 <div style="display:none" id="labelRam">Memória Ram</div>
 
               </div>
-              <div class="container" style="width:500px; height: 200px">
+              <div class="container-fluid" style="width:500px; height: 200px">
                 <canvas style="display:none; width:500px; height: 200px" id="myCpuChart"></canvas>
                 <div style="display:none" id="labelCpu">Processador</div>
 
               </div>
             </div>
           </div>
+          </div>
+
+
 
         </div>
 
@@ -360,6 +363,7 @@
 `;
 
 
+  var servidorSelecionado = false;
 
   function selecionarServidor() {
     $('#modalSelecionarServidor').modal('hide');
@@ -372,7 +376,11 @@
     document.getElementById('labelCpu').style.display = 'inline';
     document.getElementById('labelRam').style.display = 'inline';
     document.getElementById('labelDisco').style.display = 'inline';
-    atualizarGrafico();
+
+    atualizarGraficoRam();
+    atualizarGraficoCpu();
+    servidorSelecionado = true;
+
   }
 
   $(document).ready(function () {
@@ -382,7 +390,7 @@
   listarServidores();
   verificarPermissao();
 
-  function verificarAutenticacao() { 
+  function verificarAutenticacao() {
     usuario = sessionStorage.nome;
     if (usuario == undefined) {
       window.location.href = '../login.html';
@@ -451,7 +459,7 @@
             document.getElementById(`nomeServidor`).innerHTML += conteudo;
           }
         });
-        
+
       } else {
         console.log("Error!!");
       }

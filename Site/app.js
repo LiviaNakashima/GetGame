@@ -8,7 +8,7 @@ var usuariosRouter = require('./routes/usuarios');
 var auditoriaRouter = require('./routes/auditoria');
 var servidorRouter = require('./routes/servidor');
 var permissaoRouter = require('./routes/permissao');
-var ramRouter = require('./routes/ram');
+var hardwareRouter = require('./routes/hardware');
 
 var app = express();
 
@@ -23,6 +23,6 @@ app.use('/usuarios', usuariosRouter);
 app.use('/auditoria', auditoriaRouter);
 app.use('/servidor', servidorRouter);
 app.use('/permissao', permissaoRouter);
-app.use('/ram',ramRouter);
+app.use('/hardware',hardwareRouter);
 
 module.exports = app;

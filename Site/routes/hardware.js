@@ -4,22 +4,31 @@ var router = express.Router();
 var banco = require('../app-banco');
 // não mexa nessas 3 linhas!
 
-router.get('/ListarRam', function (req, res, next) {
+
+// MEMORIA RAM
+router.get('/ListarDados', function (req, res, next) {
   console.log(banco.conexao);
 
-  var leituraRam = {
+  var leituraDados = {
     ramAtual: 0,
-    ramLivre: 0
+    
+    cpuAtual: 0,
+
+    discoAtual: 0
   };
 
   banco.conectar().then(() => {
-    return banco.sql.query(`select top(1) ramStatusServidor as ramAtual from tbStatusServidor 
+    return banco.sql.query(`select top(1) ramStatusServidor as ramAtual, 
+    cpuStatusServidor as cpuAtual, 
+    discoStatusServidor as discoAtual from tbStatusServidor 
     where codServidor = (select codServidor from tbServidor where codServidor = 1) 
     ORDER BY ramStatusServidor DESC;`);
   }).then(consulta => {
-    leituraRam.ramAtual = consulta.recordset[0].ramAtual;
-    leituraRam.ramLivre = 100 - Number(consulta.recordset[0].ramAtual);
-    
+    leituraDados.ramAtual = consulta.recordset[0].ramAtual;
+    leituraDados.cpuAtual = consulta.recordset[0].cpuAtual;    
+    leituraDados.discoAtual = consulta.recordset[0].discoAtual;    
+
+
     console.log(`Resultado da consulta: ${consulta.recordset}`);
     
     if(consulta.recordset.length==0){
@@ -39,6 +48,7 @@ router.get('/ListarRam', function (req, res, next) {
   });
 
 }); 
+
 
 
 
