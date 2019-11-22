@@ -412,7 +412,7 @@
                 <tr>
                       <td>${linha.nomeUsuario}</td>
                       <td>${linha.CPFUsuario}</td>
-                      <td>${linha.permissaoUsuario}</td>
+                      <td>${linha.permissaoUsuario == 1 ? "Administrador": "Operador"}</td>
                     </tr>
                 `;
                 document.getElementById(`lista_usuario`).innerHTML += conteudo;

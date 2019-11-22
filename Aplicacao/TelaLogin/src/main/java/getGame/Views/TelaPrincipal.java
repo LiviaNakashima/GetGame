@@ -5,6 +5,7 @@
  */
 package getGame.Views;
 
+import getGame.DAO.ProcessosDAO;
 import getGame.DAO.StatusDAO;
 import getGame.LOG.GeracaoLog;
 import getGame.Model.Processos;
@@ -24,6 +25,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     GeracaoLog geracaoLog = new GeracaoLog();
     StatusDAO status = new StatusDAO();
+    ProcessosDAO processosDAO = new ProcessosDAO();
     Logger gameLog = Logger.getLogger("game");
     Ram ram = new Ram();
     Disco disk = new Disco();
@@ -113,6 +115,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         public void run() {
             try{
                 Util.sleep(25000);
+                processosDAO.inserirProcessos(processos.getNomeProcesso());
                 status.inserirStatusServidor(cpu.getCPUUsada(), ram.getMemoriaUsada(), disk.getEspacoUsado(),
                             "on", "00:00:00", 1, LocalDate.now());
             } catch (Exception e){}

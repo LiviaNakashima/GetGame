@@ -6,7 +6,6 @@
 package getGame.DAO;
 
 import java.time.LocalDate;
-import org.apache.commons.dbcp2.BasicDataSource;
 import org.springframework.jdbc.core.JdbcTemplate;
 
 
@@ -19,18 +18,10 @@ public class StatusDAO {
     
     public boolean inserirStatusServidor
         (Float cpu, Float ram, Float disco, String status, String tempoOff, Integer codServidor, LocalDate data){
-        BasicDataSource dataSource = new BasicDataSource();
         Conexao conect = new Conexao();
         
-
         jdbcTemplate = new JdbcTemplate(conect.getDataSource());
         
-//        String insercao = String.format("insert into tbStatusServidor values(%.2f, %.2f, %.2f, '%s', '%s', %d, '%s');", 
-//                cpu, ram, disco
-//                , status, tempoOff, codServidor, data);
-//        
-//        System.out.println(insercao);
-//        jdbcTemplate.execute(insercao);
         try {
             jdbcTemplate.update("insert into tbStatusServidor(cpuStatusServidor, ramStatusServidor, discoStatusServidor, situacaoStatusServidor, tempoOffStatusServidor, codServidor, dataHoraStatusServidor)"
                                 + "values(?, ?, ?, ?, ?, ?, ?)", 
