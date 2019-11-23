@@ -13,9 +13,12 @@ import getGame.Model.CPU;
 import getGame.Model.Disco;
 import getGame.Model.Ram;
 import getGame.Telegram.GetGameBot;
+import java.awt.Taskbar;
 import java.time.LocalDate;
 import java.util.logging.Logger;
 import oshi.util.Util;
+import sun.jvm.hotspot.runtime.ThreadState;
+import sun.security.util.SecurityConstants;
 
 /**
  *
@@ -31,8 +34,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
     Disco disk = new Disco();
     CPU cpu = new CPU();
     Processos processos = new Processos();
-    Thread logTxt = new Thread();
-    String log, log1;
+    String log;
 
     public TelaPrincipal() {
         initComponents();
@@ -54,23 +56,26 @@ public class TelaPrincipal extends javax.swing.JFrame {
         public void run() {
             try {
                 Boolean verificacao = true;
+                Thread insertThread;
+                Thread telegramThread;
+                Thread processosThread;
                 while (verificacao) {
-
                     log = String.format("Status do Servidor: cpu %s%%, ram %s%%, disco %s%%",
                      cpu.getCPUUsada().toString(),
                      ram.getMemoriaUsada().toString().substring(0, 5),
                      (disk.getEspacoUsado()+"").substring(0, 5));
-                    log1 = log;
-
                     lbCPU.setText(cpu.getCPU());
                     lbRAM.setText(ram.getRAM());
                     lbHD.setText(disk.getDisco());
                     
-                    new Thread(gravarBanco).start();
-                    new Thread(chamarTelegram).start();
-                    new Thread(registrarLogLocal).start();
-                    new Thread(listarProcessos).start();
-                    System.gc();
+                    processosThread = new Thread(listarProcessos);
+                    processosThread.start();
+                    telegramThread = new Thread(chamarTelegram);
+                    telegramThread.start();
+                    insertThread = new Thread(gravarBanco);
+                    insertThread.start();
+                    insertThread.sleep(30000);
+                    processosThread.sleep(8000);
                     Util.sleep(5000);
                 }
             } catch (Exception e) {
@@ -78,7 +83,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         }
     };
     
-    private Runnable registrarLogLocal = new Runnable() {
+    private Runnable gravarLogs = new Runnable() {
         public void run() {
             try{
                 geracaoLog.gerarPasta();
@@ -101,10 +106,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private Runnable chamarTelegram = new Runnable() {
         public void run() {
             try{
+                Thread logsThread;
                 if(cpu.getCPUUsada() > 70 || ram.getMemoriaUsada() > 70 || disk.getEspacoUsado() > 70) {
-                    gameLog.info(log1);
                     GetGameBot telegram = new GetGameBot();
-                    telegram.apiTelegram(log1);
+                    telegram.apiTelegram(log);
+                    logsThread = new Thread(gravarLogs);
+                    logsThread.start();
                 }
             } catch (Exception e){}
  
@@ -114,8 +121,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private Runnable gravarBanco = new Runnable() {
         public void run() {
             try{
-                Util.sleep(25000);
-                processosDAO.inserirProcessos(processos.getNomeProcesso());
                 status.inserirStatusServidor(cpu.getCPUUsada(), ram.getMemoriaUsada(), disk.getEspacoUsado(),
                             "on", "00:00:00", 1, LocalDate.now());
             } catch (Exception e){}
