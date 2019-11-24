@@ -18,18 +18,18 @@ router.get('/ListarDados', function (req, res, next) {
   };
 
   banco.conectar().then(() => {
-    return banco.sql.query(`select top(1) ramStatusServidor as ramAtual, 
+    return banco.sql.query(`select top(2) ramStatusServidor as ramAtual, 
     cpuStatusServidor as cpuAtual, 
     discoStatusServidor as discoAtual from tbStatusServidor 
     where codServidor = (select codServidor from tbServidor where codServidor = 1) 
-    ORDER BY ramStatusServidor DESC;`);
+    ORDER BY ramStatusServidor asc;`);
   }).then(consulta => {
     leituraDados.ramAtual = consulta.recordset[0].ramAtual;
     leituraDados.cpuAtual = consulta.recordset[0].cpuAtual;    
     leituraDados.discoAtual = consulta.recordset[0].discoAtual;    
 
 
-    console.log(`Resultado da consulta: ${consulta.recordset}`);
+    console.log(`Resultado da consulta: ${consulta}`);
     
     if(consulta.recordset.length==0){
         res.status(404).send("Nenhum dado de memoria ram encontrado");

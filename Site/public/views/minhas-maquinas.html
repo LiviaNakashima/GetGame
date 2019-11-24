@@ -325,9 +325,9 @@
 
     <!-- CHARTS DE CPU, MEMORIA E DISCO-->
 
-    <script src="js/demo/chartRam.js"></script>
-    <script src="js/demo/chartCpu.js"></script>
-    <script src="js/demo/chartDisk.js"></script>
+    <script src="js/demo/chartHardware.js"></script>
+    <!--<script src="js/demo/chartCpu.js"></script>-->
+    <!--<script src="js/demo/chartDisk.js"></script>-->
 
 
 </body>
@@ -377,8 +377,9 @@
     document.getElementById('labelRam').style.display = 'inline';
     document.getElementById('labelDisco').style.display = 'inline';
 
-    atualizarGraficoRam();
-    atualizarGraficoCpu();
+    atualizarGraficos();
+    //atualizarGraficoRam();
+    //atualizarGraficoCpu();
     servidorSelecionado = true;
 
   }

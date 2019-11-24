@@ -1,12 +1,12 @@
-let ramIndisponivel = 0;
-let ramDisponivel = 0;
-let corInicial = "#1cc88a";
-let corCritico = "#e74a3b";
+let cpuIndisponivel = 0;
+let cpuDisponivel = 0;
+let corInicialCpu = "#1cc88a";
+let corCriticoCpu = "#e74a3b";
 
-let corDisponivel = "#1cc88a";
-let corIndisponivel = "#858796";
+let corDisponivelCpu = "#1cc88a";
+let corIndisponivelCpu = "#858796";
 
-var exibiu_grafico = false;
+var exibiuGraficoCpu = false;
 
 
 function atualizarGraficoCpu() {
@@ -19,10 +19,10 @@ Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,Bli
 Chart.defaults.global.defaultFontColor = '#858796';
 
 
-function configurarGrafico() {
-  var configuracoes = {
+function configurarGraficoCpu() {
+  var configuracoesCpu = {
     maintainAspectRatio: false,
-    animation: exibiu_grafico ? false : {duration: 1500},
+    animation: exibiuGraficoCpu ? false : {duration: 1500},
     tooltips: {
       backgroundColor: "rgb(255,255,255)",
       bodyFontColor: "#858796",
@@ -39,18 +39,18 @@ function configurarGrafico() {
     cutoutPercentage: 70,
   };
 
-  exibiu_grafico = true;
+  exibiuGraficoCpu = true;
 
-  return configuracoes;
+  return configuracoesCpu;
 }
 
 function obterDadosGrafico() {
 
-  var dados = {
+  var dadosCpu = {
 
     datasets: [{
-      data: [ramIndisponivel,ramDisponivel],
-      backgroundColor: [corIndisponivel,corDisponivel]
+      data: [cpuIndisponivel,cpuDisponivel],
+      backgroundColor: [corIndisponivelCpu,corDisponivelCpu]
     }],
     labels: ["Utilizado","Disponível"]
   };
@@ -69,39 +69,39 @@ function obterDadosGrafico() {
 
           // aqui, após 'registro.' use os nomes 
           // dos atributos que vem no JSON 
-          // que gerou na consulta ao banco de dados
+          // que gerou na consulta ao banco de dadosCpu
 
-          //dados.datasets[0].data.push(registro.ramAtual);
-          ramIndisponivel = parseFloat(registro.ramAtual).toFixed(2);
-          ramDisponivel = parseFloat(100 - ramIndisponivel).toFixed(2);
-          if (ramDisponivel <= 20) {
-            corDisponivel = corCritico;
+          //dadosCpu.datasets[0].data.push(registro.ramAtual);
+          cpuIndisponivel = parseFloat(registro.cpuAtual).toFixed(2);
+          cpuDisponivel = parseFloat(100 - cpuIndisponivel).toFixed(2);
+          if (cpuDisponivel <= 20) {
+            corDisponivelCpu = corCriticoCpu;
           } else {
-            corDisponivel = corInicial;
+            corDisponivelCpu = corInicialCpu;
           }
         }
-        console.log(JSON.stringify(dados));
+        console.log(JSON.stringify(dadosCpu));
 
 
-        plotarGrafico(dados);
+        plotarGraficoCpu(dadosCpu);
       });
     } else {
       console.error('Nenhum dado encontrado ou erro na API');
     }
   })
     .catch(function (error) {
-      console.error(`Erro na obtenção dos dados p/ gráfico: ${error.message}`);
+      console.error(`Erro na obtenção dos dadosCpu p/ gráfico: ${error.message}`);
     });
 }
 
-function plotarGrafico(dados) {
+function plotarGraficoCpu(dadosCpu) {
   console.log('iniciando plotagem do gráfico...');
 
-  var ctx = document.getElementById("myRamChart");
-  window.myRamChart = new Chart(ctx, {
+  var ctx = document.getElementById("myCpuChart");
+  window.myCpuChart = new Chart(ctx, {
     type: 'doughnut',
-    data: dados,
-    options: configurarGrafico()
+    data: dadosCpu,
+    options: configurarGraficoCpu()
   });
 
 }
