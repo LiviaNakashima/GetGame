@@ -17,7 +17,6 @@ public class ProcessosDAO {
     
     public void inserirProcessos(List<String> processos){
        Conexao conect = new Conexao();
-       
 
        jdbcTemplate = new JdbcTemplate(conect.getDataSource());
 

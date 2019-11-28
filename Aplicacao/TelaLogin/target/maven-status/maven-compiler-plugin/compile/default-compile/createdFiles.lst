@@ -19,6 +19,7 @@ getGame\Views\Login$1.class
 getGame\Views\TelaPrincipal$7.class
 getGame\Views\TelaPrincipal$1.class
 getGame\LOG\GeracaoLog.class
+getGame\Views\TelaPrincipal$9.class
 getGame\Model\CPU.class
 getGame\Model\Ram.class
 getGame\Views\TelaPrincipal.class

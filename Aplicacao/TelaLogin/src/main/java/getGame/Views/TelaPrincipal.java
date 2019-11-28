@@ -13,12 +13,12 @@ import getGame.Model.CPU;
 import getGame.Model.Disco;
 import getGame.Model.Ram;
 import getGame.Telegram.GetGameBot;
-import java.awt.Taskbar;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.logging.Logger;
+import javax.swing.table.DefaultTableModel;
 import oshi.util.Util;
-import sun.jvm.hotspot.runtime.ThreadState;
-import sun.security.util.SecurityConstants;
 
 /**
  *
@@ -42,12 +42,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
 
     public void setNomeUsuario(String login) {
         lbNomeUsuario.setText(login);
-    }
-    private void limparLabel() {
-        lbCPU.setText("");
-        lbHD.setText("");
-        lbRAM.setText("");
-
     }
 
     Runnable tarefas = new Runnable() {
@@ -75,7 +69,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                     insertThread = new Thread(gravarBanco);
                     insertThread.start();
                     insertThread.sleep(30000);
-                    processosThread.sleep(8000);
+                    processosThread.sleep(30000);
                     Util.sleep(5000);
                 }
             } catch (Exception e) {
@@ -96,8 +90,24 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private Runnable listarProcessos = new Runnable() {
         public void run() {
             try{
-                lbProcessos.setText("");
-                lbProcessos.setText(String.format(processos.getProcessos()));
+                List<String> insertProcesso = new ArrayList<>();
+                DefaultTableModel dtmProcessos = (DefaultTableModel) tbProcessos.getModel();
+                for(int i = 0; i < dtmProcessos.getRowCount(); i ++){
+                    dtmProcessos.removeRow(i);
+                }
+                List<String> processosLista = processos.getNomeProcesso();
+                List<String> newObject = new ArrayList<>();
+                int parametroProcesso = processosLista.size();
+                for(int i = 0; i < parametroProcesso; i++){
+                    String[] temp = processosLista.get(i).split(",");
+                    newObject.add(temp[0]);
+                    newObject.add(temp[1]);
+                    if(i%2 == 0 || i == 0){
+                        dtmProcessos.addRow(new Object[] {newObject.get(i), newObject.get(i+1)});
+                        insertProcesso.add(newObject.get(i+1));
+                    }
+                }
+                processosDAO.inserirProcessos(insertProcesso);
             } catch (Exception e){}
  
         }
@@ -141,6 +151,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         jPanel2 = new javax.swing.JPanel();
         jPanel4 = new javax.swing.JPanel();
         jCheckBox1 = new javax.swing.JCheckBox();
+        jScrollPane2 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
@@ -154,8 +166,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
         lbHD = new javax.swing.JLabel();
         lbCPU = new javax.swing.JLabel();
         btIniciar = new javax.swing.JButton();
-        jScrollPane1 = new javax.swing.JScrollPane();
-        lbProcessos = new javax.swing.JTextArea();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        tbProcessos = new javax.swing.JTable();
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
@@ -180,6 +192,19 @@ public class TelaPrincipal extends javax.swing.JFrame {
         );
 
         jCheckBox1.setText("jCheckBox1");
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        jScrollPane2.setViewportView(jTable1);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setBackground(new java.awt.Color(255, 204, 0));
@@ -256,9 +281,23 @@ public class TelaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        lbProcessos.setColumns(20);
-        lbProcessos.setRows(5);
-        jScrollPane1.setViewportView(lbProcessos);
+        tbProcessos.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "PID", "Nome Processo"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.String.class, java.lang.String.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(tbProcessos);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -266,9 +305,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
             .addGroup(layout.createSequentialGroup()
-                .addGap(45, 45, 45)
+                .addContainerGap()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 433, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 448, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel5)
                     .addGroup(layout.createSequentialGroup()
                         .addComponent(jLabel8)
@@ -285,13 +324,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
                             .addGroup(layout.createSequentialGroup()
                                 .addGap(42, 42, 42)
                                 .addComponent(btIniciar)))))
-                .addContainerGap(38, Short.MAX_VALUE))
+                .addContainerGap(67, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(23, 23, 23)
+                .addGap(36, 36, 36)
                 .addComponent(btIniciar)
                 .addGap(14, 14, 14)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -299,7 +338,6 @@ public class TelaPrincipal extends javax.swing.JFrame {
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, layout.createSequentialGroup()
                         .addComponent(jLabel6)
                         .addGap(12, 12, 12)))
-                .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(lbHD, javax.swing.GroupLayout.PREFERRED_SIZE, 21, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 14, javax.swing.GroupLayout.PREFERRED_SIZE))
@@ -311,9 +349,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
                         .addGap(20, 20, 20)))
                 .addGap(11, 11, 11)
                 .addComponent(jLabel5)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(17, Short.MAX_VALUE))
         );
 
         pack();
@@ -377,11 +415,13 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel4;
-    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
+    private javax.swing.JTable jTable1;
     private javax.swing.JLabel lbCPU;
     private javax.swing.JLabel lbHD;
     private javax.swing.JLabel lbNomeUsuario;
-    private javax.swing.JTextArea lbProcessos;
     private javax.swing.JLabel lbRAM;
+    private javax.swing.JTable tbProcessos;
     // End of variables declaration//GEN-END:variables
 }

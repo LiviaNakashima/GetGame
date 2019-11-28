@@ -17,12 +17,11 @@ public class Processos {
 
     public List<String> getNomeProcesso() {
         SystemInfo si = new SystemInfo();
-        HardwareAbstractionLayer hal = si.getHardware();
         OperatingSystem os = si.getOperatingSystem();
         List<String> processos = retornaProcessos(os);
         return processos;
     }
-    
+   
     public String getProcessos() {
         processoFormatado = "";
         SystemInfo si = new SystemInfo();
@@ -59,11 +58,16 @@ public class Processos {
 
         for (int i = 0; i < procs.size() && i < Integer.MAX_VALUE; i++) {
             OSProcess p = procs.get(i);
-            oshi.add(String.format("%s", p.getName()));
+            oshi.add(String.format("%5d,%s", p.getProcessID(), p.getName()));
         }
-        
-        List<String> processos = oshi;
-        return processos;
+        return oshi;
     }
+    
+    
 }
+
+
+
+
+
 
