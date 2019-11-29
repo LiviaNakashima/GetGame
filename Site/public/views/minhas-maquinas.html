@@ -256,78 +256,123 @@
         <div class="container-fluid" style="text-align: center;">
 
           <h1 class="h3 mb-0 text-gray-800" id="lbNomeServidor" style="display: none;">Dashboard</h1>
-
+  
           <div class="row-fluid mb-0" style="text-align:center">
-            <div class="chart-area" style="display:flex; margin-top: 5%;">
-              <div class="container-fluid" style="width:500px; height: 200px">
-                <canvas style="display:none; width:500px; height: 200px" id="myDiskChart"></canvas>
-                <div style="display:none" id="labelDisco">Disco</div>
+            <div class="chart-area" style="display:flex; margin-top: 5%; text-align: center;">
+              <div class="card text-center" style="height: 450px">
+                <!-- <div class="container-fluid" style="width:500px; height: 200px"> -->
+                <div class="card-header">
+                  Disco rígido
+                </div>
+             
+                <div class="card-body">
+                  <div class="card-img-center">
+                    <canvas style="display:none; width:500px; height: 200px" id="myDiskChart"></canvas>
+                  </div>
 
+                  <h5 class="card-title">Legenda</h5>
+                  <ul class="list-group list-group-flush">
+                      <li class="list-group-item">Disponível <b id="dadosDiscoDisponivel"></b>%<br>
+                        Indisponível <b id="dadosDiscoIndisponivel"></b>%
+                      </li>
+                    </ul>
+                </div>
+                <!-- </div> -->
               </div>
-              <div class="container-fluid" style="width:500px; height: 200px">
-                <canvas style="display:none; width:500px; height: 200px" id="myRamChart"></canvas>
-                <div style="display:none" id="labelRam">Memória Ram</div>
-
-              </div>
-              <div class="container-fluid" style="width:500px; height: 200px">
-                <canvas style="display:none; width:500px; height: 200px" id="myCpuChart"></canvas>
-                <div style="display:none" id="labelCpu">Processador</div>
-
-              </div>
+              <div class="card text-center" style="height: 450px">
+                  <!-- <div class="container-fluid" style="width:500px; height: 200px"> -->
+                  <div class="card-header">
+                    Memória Ram
+                  </div>
+               
+                  <div class="card-body">
+                    <div class="card-img-center">
+                      <canvas style="display:none; width:500px; height: 200px" id="myRamChart"></canvas>
+                    </div>
+  
+                    <h5 class="card-title">Legenda</h5>
+                    <ul class="list-group list-group-flush">
+                        <li class="list-group-item">Disponível <b id="dadosRamDisponivel"></b>%<br>
+                          Indisponível <b id="dadosRamIndisponivel"></b>%
+                        </li>
+                      </ul>
+                  </div>
+                  <!-- </div> -->
+                </div>
+                <div class="card text-center" style="height: 450px">
+                    <!-- <div class="container-fluid" style="width:500px; height: 200px"> -->
+                    <div class="card-header">
+                      Processador
+                    </div>
+                 
+                    <div class="card-body">
+                      <div class="card-img-center">
+                        <canvas style="display:none; width:500px; height: 200px" id="myCpuChart"></canvas>
+                      </div>
+    
+                      <h5 class="card-title">Legenda</h5>
+                      <ul class="list-group list-group-flush">
+                          <li class="list-group-item">Disponível <b id="dadosCpuDisponivel"></b>%<br>
+                            Indisponível <b id="dadosCpuIndisponivel"></b>%
+                          </li>
+                        </ul>
+                    </div>
+                    <!-- </div> -->
+                  </div>
             </div>
           </div>
-          </div>
-
-
-
         </div>
 
-        <!-- Footer -->
-        <footer class="sticky-footer bg-white">
-          <div class="container my-auto">
-            <div class="copyright text-center my-auto">
-              <span>Copyright &copy; ggGetGame 2019</span>
-            </div>
-          </div>
-        </footer>
-        <!-- End of Footer -->
+
 
       </div>
-      <!-- End of Content Wrapper -->
+
+      <!-- Footer -->
+      <footer class="sticky-footer bg-white">
+        <div class="container my-auto">
+          <div class="copyright text-center my-auto">
+            <span>Copyright &copy; ggGetGame 2019</span>
+          </div>
+        </div>
+      </footer>
+      <!-- End of Footer -->
 
     </div>
-    <!-- End of Page Wrapper -->
+    <!-- End of Content Wrapper -->
 
-    <!-- Scroll to Top Button-->
-    <a class="scroll-to-top rounded" href="#page-top">
-      <i class="fas fa-angle-up"></i>
-    </a>
+  </div>
+  <!-- End of Page Wrapper -->
 
-    <!-- Bootstrap core JavaScript-->
-    <script src="vendor/jquery/jquery.min.js"></script>
-    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+  <!-- Scroll to Top Button-->
+  <a class="scroll-to-top rounded" href="#page-top">
+    <i class="fas fa-angle-up"></i>
+  </a>
 
-    <!-- Core plugin JavaScript-->
-    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+  <!-- Bootstrap core JavaScript-->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
 
-    <!-- Custom scripts for all pages-->
-    <script src="js/sb-admin-2.min.js"></script>
+  <!-- Core plugin JavaScript-->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
 
-    <!-- Page level plugins -->
-    <script src="vendor/chart.js/Chart.min.js"></script>
+  <!-- Custom scripts for all pages-->
+  <script src="js/sb-admin-2.min.js"></script>
 
-    <script src="js/demo/chart-horizontalBar-demo.js"></script>
+  <!-- Page level plugins -->
+  <script src="vendor/chart.js/Chart.min.js"></script>
 
-    <!-- Page level custom scripts -->
-    <script src="js/demo/chart-area-demo3.js"></script>
+  <script src="js/demo/chart-horizontalBar-demo.js"></script>
 
-    <script src="js/demo/chart-pie-demo.js"></script>
+  <!-- Page level custom scripts -->
+  <script src="js/demo/chart-area-demo3.js"></script>
 
-    <!-- CHARTS DE CPU, MEMORIA E DISCO-->
+  <script src="js/demo/chart-pie-demo.js"></script>
 
-    <script src="js/demo/chartHardware.js"></script>
-    <!--<script src="js/demo/chartCpu.js"></script>-->
-    <!--<script src="js/demo/chartDisk.js"></script>-->
+  <!-- CHARTS DE CPU, MEMORIA E DISCO-->
+
+  <script src="js/demo/chartHardware.js"></script>
+  <!--<script src="js/demo/chartCpu.js"></script>-->
+  <!--<script src="js/demo/chartDisk.js"></script>-->
 
 
 </body>
@@ -373,9 +418,9 @@
     document.getElementById('myRamChart').style.display = 'inline';
     document.getElementById('myDiskChart').style.display = 'inline';
     document.getElementById('myCpuChart').style.display = 'inline';
-    document.getElementById('labelCpu').style.display = 'inline';
-    document.getElementById('labelRam').style.display = 'inline';
-    document.getElementById('labelDisco').style.display = 'inline';
+    // document.getElementById('labelCpu').style.display = 'inline';
+    // document.getElementById('labelRam').style.display = 'inline';
+    // document.getElementById('labelDisco').style.display = 'inline';
 
     atualizarGraficos();
     //atualizarGraficoRam();

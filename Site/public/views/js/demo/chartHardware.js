@@ -23,37 +23,27 @@ var exibiuGraficoRam = false;
 var exibiuGraficoCpu = false;
 var exibiuGraficoDisco = false;
 
+var configuracoesDisco;
+var configuracoesRam;
+var configuracoesCpu;
+
+var dadosDisco;
+var dadosRam;
+var dadosCpu;
+
 
 function atualizarGraficos() {
   setTimeout(atualizarGraficos, 10000);
   stop(10000);
-  setInterval(obterDadosGraficos(), 10000);
-}
-
-/*function atualizarGraficoRam() {
-  setTimeout(atualizarGraficoRam, 3000);
-  stop(3000);
   setInterval(obterDadosGraficos(), 3000);
 }
-
-function atualizarGraficoCpu() {
-  setTimeout(atualizarGraficoCpu, 3000);
-  stop(3000);
-  setInterval(obterDadosGraficos(), 3000);
-}
-
-function atualizarGraficoDisco() {
-  setTimeout(atualizarGraficoDisco, 3000);
-  stop(3000);
-  setInterval(obterDadosGraficos(), 3000);
-}*/
 
 Chart.defaults.global.defaultFontFamily = 'Nunito', '-apple-system,system-ui,BlinkMacSystemFont,"Segoe UI",Roboto,"Helvetica Neue",Arial,sans-serif';
 Chart.defaults.global.defaultFontColor = '#858796';
 
 // RAM CHART
 function configurarGraficoRam() {
-  var configuracoesRam = {
+  configuracoesRam = {
     maintainAspectRatio: false,
     responsive: true,
     animation: exibiuGraficoRam ? false : { duration: 1500 },
@@ -68,7 +58,8 @@ function configurarGraficoRam() {
       caretPadding: 10,
     },
     legend: {
-      display: true
+      display: true,
+      position: "bottom"
     },
     cutoutPercentage: 70,
   };
@@ -80,10 +71,10 @@ function configurarGraficoRam() {
 
 // CPU CHART
 function configurarGraficoCpu() {
-  var configuracoesCpu = {
+  configuracoesCpu = {
     maintainAspectRatio: false,
     responsive: true,
-    animation: exibiuGraficoCpu ? false : { duration: 1500 },
+    animation: exibiuGraficoCpu ? false : { duration: 1000 },
     tooltips: {
       backgroundColor: "rgb(255,255,255)",
       bodyFontColor: "#858796",
@@ -95,7 +86,8 @@ function configurarGraficoCpu() {
       caretPadding: 10,
     },
     legend: {
-      display: true
+      display: true,
+      position: "bottom"
     },
     cutoutPercentage: 70,
   };
@@ -107,7 +99,7 @@ function configurarGraficoCpu() {
 
 // DISCO CHART
 function configurarGraficoDisco() {
-  var configuracoesDisco = {
+  configuracoesDisco = {
     maintainAspectRatio: false,
     responsive: true,
     animation: exibiuGraficoDisco ? false : { duration: 1500 },
@@ -122,7 +114,8 @@ function configurarGraficoDisco() {
       caretPadding: 10,
     },
     legend: {
-      display: true
+      display: true,
+      position: "bottom"
     },
     cutoutPercentage: 70,
   };
@@ -134,7 +127,7 @@ function configurarGraficoDisco() {
 
 function obterDadosGraficos() {
 
-  var dadosRam = {
+  dadosRam = {
 
     datasets: [{
       data: [ramIndisponivel, ramDisponivel],
@@ -143,7 +136,7 @@ function obterDadosGraficos() {
     labels: ["Utilizado (%)", "Disponível (%)"]
   };
 
-  var dadosCpu = {
+  dadosCpu = {
 
     datasets: [{
       data: [cpuIndisponivel, cpuDisponivel],
@@ -152,7 +145,7 @@ function obterDadosGraficos() {
     labels: ["Utilizado (%)", "Disponível (%)"]
   };
 
-  var dadosDisco = {
+  dadosDisco = {
 
     datasets: [{
       data: [discoIndisponivel, discoDisponivel],
@@ -180,12 +173,19 @@ function obterDadosGraficos() {
           //dadosRam.datasets[0].data.push(registro.ramAtual);
           ramIndisponivel = parseFloat(registro.ramAtual).toFixed(2);
           ramDisponivel = parseFloat(100 - ramIndisponivel).toFixed(2);
+          document.getElementById('dadosRamIndisponivel').innerHTML = ramIndisponivel;
+          document.getElementById('dadosRamDisponivel').innerHTML = ramDisponivel;
 
           cpuIndisponivel = parseFloat(registro.cpuAtual).toFixed(2);
           cpuDisponivel = parseFloat(100 - cpuIndisponivel).toFixed(2);
+          document.getElementById('dadosCpuIndisponivel').innerHTML = cpuIndisponivel;
+          document.getElementById('dadosCpuDisponivel').innerHTML = cpuDisponivel;
 
           discoIndisponivel = parseFloat(registro.discoAtual).toFixed(2);
           discoDisponivel = parseFloat(100 - discoIndisponivel).toFixed(2);
+          document.getElementById('dadosDiscoIndisponivel').innerHTML = discoIndisponivel;
+          document.getElementById('dadosDiscoDisponivel').innerHTML = discoDisponivel;
+
 
           if (ramDisponivel <= 20) {
             corDisponivelRam = corCritico;
@@ -230,32 +230,50 @@ function plotarGraficoRam(dadosRam) {
   console.log('iniciando plotagem do gráfico...');
 
   var ctx = document.getElementById("myRamChart");
-  window.myRamChart = new Chart(ctx, {
-    type: 'doughnut',
-    data: dadosRam,
-    options: configurarGraficoRam()
-  });
+  if (window.myChartRam) {
+    window.myChartRam.data = dadosRam;
+    window.myChartRam.update();
+    exibiuGraficoRam = true;
+  } else {
+    window.myChartRam = new Chart(ctx, {
+      type: 'doughnut',
+      data: dadosRam,
+      options: configurarGraficoRam()
+    });
+  }
 }
 
 function plotarGraficoCpu(dadosCpu) {
   console.log('iniciando plotagem do gráfico...');
 
   var ctx = document.getElementById("myCpuChart");
-  window.myCpuChart = new Chart(ctx, {
-    type: 'doughnut',
-    data: dadosCpu,
-    options: configurarGraficoCpu()
-  });
+  if (window.myChartCpu) {
+    window.myChartCpu.data = dadosCpu;
+    window.myChartCpu.update();
+    exibiuGraficoCpu = true;
+  } else {
+    window.myChartCpu = new Chart(ctx, {
+      type: 'doughnut',
+      data: dadosCpu,
+      options: configurarGraficoCpu()
+    });
+  }
 }
 
 function plotarGraficoDisco(dadosDisco) {
   console.log('iniciando plotagem do gráfico...');
 
   var ctx = document.getElementById("myDiskChart");
-  window.myCpuChart = new Chart(ctx, {
-    type: 'doughnut',
-    data: dadosDisco,
-    options: configurarGraficoDisco()
-  });
+  if (window.myChartDisk) {
+    window.myChartDisk.data = dadosDisco;
+    window.myChartDisk.update();
+    exibiuGraficoDisco = true;
+  } else {
+    window.myChartDisk = new Chart(ctx, {
+      type: 'doughnut',
+      data: dadosDisco,
+      options: configurarGraficoDisco()
+    });
+  }
 }
 
