@@ -1,0 +1,14 @@
+{
+    "sqltools.connections": [
+        {
+            "connectionTimeout": 30,
+            "database": "bdGrupo2",
+            "dialect": "MSSQL",
+            "name": "GetGame",
+            "password": "#Gfgrupo2b",
+            "port": 1433,
+            "server": "srvgetgame.database.windows.net",
+            "username": "usergetgame"
+        }
+    ]
+}
