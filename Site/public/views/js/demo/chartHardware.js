@@ -19,9 +19,9 @@ let corIndisponivelCpu = "#858796";
 let corDisponivelDisco = "#1cc88a";
 let corIndisponivelDisco = "#858796";
 
-var exibiuGraficoRam = false;
-var exibiuGraficoCpu = false;
-var exibiuGraficoDisco = false;
+let exibiuGraficoRam = false;
+let exibiuGraficoCpu = false;
+let exibiuGraficoDisco = false;
 
 var configuracoesDisco;
 var configuracoesRam;
@@ -64,8 +64,6 @@ function configurarGraficoRam() {
     cutoutPercentage: 70,
   };
 
-  exibiuGraficoRam = true;
-
   return configuracoesRam;
 }
 
@@ -92,8 +90,6 @@ function configurarGraficoCpu() {
     cutoutPercentage: 70,
   };
 
-  exibiuGraficoCpu = true;
-
   return configuracoesCpu;
 }
 
@@ -119,8 +115,6 @@ function configurarGraficoDisco() {
     },
     cutoutPercentage: 70,
   };
-
-  exibiuGraficoDisco = true;
 
   return configuracoesDisco;
 }
@@ -206,8 +200,6 @@ function obterDadosGraficos() {
           }
 
         }
-        console.log(JSON.stringify(dadosRam));
-        console.log(JSON.stringify(dadosCpu));
         console.log(JSON.stringify(dadosDisco));
 
 
@@ -227,11 +219,12 @@ function obterDadosGraficos() {
 
 
 function plotarGraficoRam(dadosRam) {
-  console.log('iniciando plotagem do gráfico...');
+  console.log('iniciando plotagem do gráfico de RAM');
 
   var ctx = document.getElementById("myRamChart");
   if (window.myChartRam) {
     window.myChartRam.data = dadosRam;
+    window.myChartRam.options = configurarGraficoRam();
     window.myChartRam.update();
     exibiuGraficoRam = true;
   } else {
@@ -244,11 +237,12 @@ function plotarGraficoRam(dadosRam) {
 }
 
 function plotarGraficoCpu(dadosCpu) {
-  console.log('iniciando plotagem do gráfico...');
+  console.log('iniciando plotagem do gráfico de CPU');
 
   var ctx = document.getElementById("myCpuChart");
   if (window.myChartCpu) {
     window.myChartCpu.data = dadosCpu;
+    window.myChartCpu.options = configurarGraficoCpu();
     window.myChartCpu.update();
     exibiuGraficoCpu = true;
   } else {
@@ -261,11 +255,12 @@ function plotarGraficoCpu(dadosCpu) {
 }
 
 function plotarGraficoDisco(dadosDisco) {
-  console.log('iniciando plotagem do gráfico...');
+  console.log('iniciando plotagem do gráfico DISCO');
 
   var ctx = document.getElementById("myDiskChart");
   if (window.myChartDisk) {
     window.myChartDisk.data = dadosDisco;
+    window.myChartDisk.options = configurarGraficoDisco();
     window.myChartDisk.update();
     exibiuGraficoDisco = true;
   } else {
