@@ -61,13 +61,5 @@ public class Processos {
             oshi.add(String.format("%5d,%s", p.getProcessID(), p.getName()));
         }
         return oshi;
-    }
-    
-    
+    }   
 }
-
-
-
-
-
-

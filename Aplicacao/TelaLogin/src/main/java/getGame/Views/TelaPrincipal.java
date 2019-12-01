@@ -8,12 +8,9 @@ package getGame.Views;
 import getGame.DAO.ProcessosDAO;
 import getGame.DAO.StatusDAO;
 import getGame.LOG.GeracaoLog;
-import getGame.Model.Processos;
-import getGame.Model.CPU;
-import getGame.Model.Disco;
-import getGame.Model.Ram;
+import getGame.Model.*;
 import getGame.Telegram.GetGameBot;
-import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Logger;
@@ -132,7 +129,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         public void run() {
             try{
                 status.inserirStatusServidor(cpu.getCPUUsada(), ram.getMemoriaUsada(), disk.getEspacoUsado(),
-                            "on", "00:00:00", 1, LocalDate.now());
+                            "on", 1, LocalDateTime.now());
             } catch (Exception e){}
  
         }
