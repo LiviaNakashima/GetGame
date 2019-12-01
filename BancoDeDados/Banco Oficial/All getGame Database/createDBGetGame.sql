@@ -25,9 +25,8 @@ create table tbStatusServidor (
 	  ramStatusServidor float not null,
 	  discoStatusServidor float not null,
 	  situacaoStatusServidor varchar(100) not null,
-	  tempoOffStatusServidor time not null,
 	  codServidor int foreign key (codServidor) references tbServidor (codServidor),
-	  dataHoraStatusServidor date not null
+	  dataHoraStatusServidor datetime not null
   );
 
 create table tbProcessoServidor (
