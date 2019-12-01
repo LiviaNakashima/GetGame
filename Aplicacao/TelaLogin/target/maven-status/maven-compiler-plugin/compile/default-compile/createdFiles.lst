@@ -4,6 +4,7 @@ getGame\LOG\DataHora.class
 getGame\Views\TelaPrincipal$6.class
 getGame\Views\Login$2.class
 getGame\DAO\Conexao.class
+getGame\Views\Login$6.class
 getGame\Views\TelaPrincipal$2.class
 getGame\Views\TelaPrincipal$8.class
 getGame\Views\Login$3.class
@@ -17,6 +18,7 @@ getGame\DAO\LoginDAO.class
 getGame\DAO\StatusDAO.class
 getGame\Views\Login$1.class
 getGame\Views\TelaPrincipal$7.class
+getGame\Views\Login$7.class
 getGame\Views\TelaPrincipal$1.class
 getGame\LOG\GeracaoLog.class
 getGame\Views\TelaPrincipal$9.class

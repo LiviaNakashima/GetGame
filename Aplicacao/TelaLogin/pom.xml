@@ -71,7 +71,11 @@
           </exclusion>
         </exclusions>
     </dependency>
-        
+        <dependency>
+            <groupId>br.com.jarvis</groupId>
+            <artifactId>jarvis-monitor</artifactId>
+            <version>1.0</version>
+        </dependency>
     </dependencies>
     <properties>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
