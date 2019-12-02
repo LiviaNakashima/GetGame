@@ -1,13 +1,13 @@
-C:\Users\aluno\Desktop\GetGame\Aplicacao\TelaLogin\src\main\java\getGame\DAO\Conexao.java
-C:\Users\aluno\Desktop\GetGame\Aplicacao\TelaLogin\src\main\java\getGame\Model\Disco.java
-C:\Users\aluno\Desktop\GetGame\Aplicacao\TelaLogin\src\main\java\getGame\DAO\ProcessosDAO.java
-C:\Users\aluno\Desktop\GetGame\Aplicacao\TelaLogin\src\main\java\getGame\Telegram\GetGameBot.java
-C:\Users\aluno\Desktop\GetGame\Aplicacao\TelaLogin\src\main\java\getGame\Views\Login.java
-C:\Users\aluno\Desktop\GetGame\Aplicacao\TelaLogin\src\main\java\getGame\LOG\DataHora.java
-C:\Users\aluno\Desktop\GetGame\Aplicacao\TelaLogin\src\main\java\getGame\DAO\StatusDAO.java
-C:\Users\aluno\Desktop\GetGame\Aplicacao\TelaLogin\src\main\java\getGame\LOG\GeracaoLog.java
-C:\Users\aluno\Desktop\GetGame\Aplicacao\TelaLogin\src\main\java\getGame\DAO\LoginDAO.java
-C:\Users\aluno\Desktop\GetGame\Aplicacao\TelaLogin\src\main\java\getGame\Model\CPU.java
-C:\Users\aluno\Desktop\GetGame\Aplicacao\TelaLogin\src\main\java\getGame\Views\TelaPrincipal.java
-C:\Users\aluno\Desktop\GetGame\Aplicacao\TelaLogin\src\main\java\getGame\Model\Processos.java
-C:\Users\aluno\Desktop\GetGame\Aplicacao\TelaLogin\src\main\java\getGame\Model\Ram.java
+E:\Projeto de PI 2 Semestre\GetGame\Aplicacao\TelaLogin\src\main\java\getGame\DAO\StatusDAO.java
+E:\Projeto de PI 2 Semestre\GetGame\Aplicacao\TelaLogin\src\main\java\getGame\Model\Ram.java
+E:\Projeto de PI 2 Semestre\GetGame\Aplicacao\TelaLogin\src\main\java\getGame\LOG\DataHora.java
+E:\Projeto de PI 2 Semestre\GetGame\Aplicacao\TelaLogin\src\main\java\getGame\DAO\Conexao.java
+E:\Projeto de PI 2 Semestre\GetGame\Aplicacao\TelaLogin\src\main\java\getGame\DAO\LoginDAO.java
+E:\Projeto de PI 2 Semestre\GetGame\Aplicacao\TelaLogin\src\main\java\getGame\Telegram\GetGameBot.java
+E:\Projeto de PI 2 Semestre\GetGame\Aplicacao\TelaLogin\src\main\java\getGame\Views\Login.java
+E:\Projeto de PI 2 Semestre\GetGame\Aplicacao\TelaLogin\src\main\java\getGame\Model\Disco.java
+E:\Projeto de PI 2 Semestre\GetGame\Aplicacao\TelaLogin\src\main\java\getGame\Model\Processos.java
+E:\Projeto de PI 2 Semestre\GetGame\Aplicacao\TelaLogin\src\main\java\getGame\Model\CPU.java
+E:\Projeto de PI 2 Semestre\GetGame\Aplicacao\TelaLogin\src\main\java\getGame\LOG\GeracaoLog.java
+E:\Projeto de PI 2 Semestre\GetGame\Aplicacao\TelaLogin\src\main\java\getGame\Views\TelaPrincipal.java
+E:\Projeto de PI 2 Semestre\GetGame\Aplicacao\TelaLogin\src\main\java\getGame\DAO\ProcessosDAO.java
