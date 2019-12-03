@@ -14,19 +14,23 @@ router.get('/ListarDados', function (req, res, next) {
     
     cpuAtual: 0,
 
-    discoAtual: 0
+    discoAtual: 0,
+
+    dataHora:0
   };
 
   banco.conectar().then(() => {
     return banco.sql.query(`select top(1) ramStatusServidor as ramAtual, 
     cpuStatusServidor as cpuAtual, 
-    discoStatusServidor as discoAtual from tbStatusServidor 
+    discoStatusServidor as discoAtual,
+    dataHoraStatusServidor as dataHora from tbStatusServidor
     where codServidor = (select codServidor from tbServidor where codServidor = 1) 
     ORDER BY codStatusServidor desc;`);
   }).then(consulta => {
     leituraDados.ramAtual = consulta.recordset[0].ramAtual;
     leituraDados.cpuAtual = consulta.recordset[0].cpuAtual;    
-    leituraDados.discoAtual = consulta.recordset[0].discoAtual;    
+    leituraDados.discoAtual = consulta.recordset[0].discoAtual;  
+    leituraDados.dataHora = consulta.recordset[0].dataHora;
 
 
     console.log(`Resultado da consulta: ${consulta}`);

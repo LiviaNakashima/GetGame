@@ -9,7 +9,7 @@ router.post('/ListarServidorAdm', function (req, res, next) {
   console.log(usuario);
   console.log(banco.conexao);
   banco.conectar().then(() => {
-    return banco.sql.query(`select codServidor, loginServidor, linkServidor from tbServidor`);
+    return banco.sql.query(`select codServidor, loginServidor, linkServidor, statusServidor from tbServidor`);
   }).then(consulta => {
 
     console.log(`Resultado da consulta de servidores: ${JSON.stringify(consulta.recordset)}`);
@@ -42,6 +42,103 @@ router.post('/ListarServidor', function (req, res, next) {
                                 inner join tbAcesso as a on (s.codServidor = a.codServidor)
                                     inner join tbUsuario as u on (a.codUsuario = u.codUsuario)
                                       where u.nomeUsuario like '${usuario}'`);
+    }).then(consulta => {
+  
+      console.log(`Resultado da consulta de servidores: ${JSON.stringify(consulta.recordset)}`);
+  
+      if (consulta.recordset.length == 0) {
+        res.status(404).send('Nenhum servidor encontrado');
+      } else {
+        res.send(consulta.recordset);
+      }
+  
+    }).catch(err => {
+  
+      var erro = `Erro na pesquisa de servidores: ${err}`;
+      console.error(erro);
+      res.status(500).send(erro);
+  
+    }).finally(() => {
+      banco.sql.close();
+    });
+  
+  });
+
+
+  router.post('/ListarDisponibilidade', function (req, res, next) {
+    var usuario = req.body.usuario;
+    console.log(usuario);
+    console.log(banco.conexao);
+    banco.conectar().then(() => {
+      return banco.sql.query(`select disponivelMes, indisponivelMes from tbServidor where codServidor = 1`);
+    }).then(consulta => {
+      console.log(`Resultado da consulta de servidores: ${JSON.stringify(consulta.recordset)}`);
+  
+      if (consulta.recordset.length == 0) {
+        res.status(404).send('Nenhum servidor encontrado');
+      } else {
+        res.send(consulta.recordset);
+      }
+  
+    }).catch(err => {
+  
+      var erro = `Erro na pesquisa de servidores: ${err}`;
+      console.error(erro);
+      res.status(500).send(erro);
+  
+    }).finally(() => {
+      banco.sql.close();
+    });
+  
+  });
+
+  router.post('/ListarIndisponibilidade', function (req, res, next) {
+    var usuario = req.body.usuario;
+    console.log(usuario);
+    console.log(banco.conexao);
+    banco.conectar().then(() => {
+      return banco.sql.query(`select DATEDIFF(second, (select dataHoraStatusServidor from tbStatusServidor where codStatusServidor = 
+                              (select count(codStatusServidor) from tbStatusServidor)-1),
+                            (select dataHoraStatusServidor from tbStatusServidor where codStatusServidor = 
+                              (select count(codStatusServidor) from tbStatusServidor))) as "Tempo Indisponivel";`);
+    }).then(consulta => {
+  
+      console.log(`Resultado da consulta de servidores: ${JSON.stringify(consulta.recordset)}`);
+  
+      if (consulta.recordset.length == 0) {
+        res.status(404).send('Nenhum servidor encontrado');
+      } else {
+        res.send(consulta.recordset);
+      }
+  
+    }).catch(err => {
+  
+      var erro = `Erro na pesquisa de servidores: ${err}`;
+      console.error(erro);
+      res.status(500).send(erro);
+  
+    }).finally(() => {
+      banco.sql.close();
+    });
+  
+  });
+
+  router.post('/VerificarDisponibilidade', function (req, res, next) {
+    var usuario = req.body.usuario;
+    var dataHora = new Date();
+    var fuso = (dataHora.getTimezoneOffset()/60 - 5);
+    if (fuso) {
+      dataHora = (new Date(dataHora.valueOf() + (fuso * 3600000)).toISOString().
+      replace(/T/, ' ').      // replace T with a space
+      replace(/\..+/, ''));
+    }
+    console.log(dataHora);
+    console.log(usuario);
+    console.log(banco.conexao);
+    banco.conectar().then(() => {
+      return banco.sql.query(`Declare @horario datetime
+                              set @horario = '${dataHora}'
+                              exec Disponibilidade @horario output`);
     }).then(consulta => {
   
       console.log(`Resultado da consulta de servidores: ${JSON.stringify(consulta.recordset)}`);
@@ -122,8 +219,6 @@ router.post('/ListarServidor', function (req, res, next) {
     
   
   });
-  
-  
   
 // não mexa nesta linha!
 module.exports = router;
