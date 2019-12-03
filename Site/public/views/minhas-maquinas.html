@@ -441,6 +441,8 @@
   verificarAutenticacao();
   listarServidores();
   verificarPermissao();
+  
+  window.setInterval('verificaServidor()', 60000);
 
   function verificarAutenticacao() {
     usuario = sessionStorage.nome;
@@ -450,6 +452,28 @@
     } else {
       usuarioLogado.innerHTML = usuario;
     }
+  }
+
+  function verificaServidor(){
+    var usuario = usuarioLogado.textContent;
+    fetch(`/servidor/VerificarDisponibilidade`, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        usuario,
+      })
+    }).then(function (response) {
+      if (response.ok) {
+        response.json().then(function (resposta) {
+          console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+          });
+      } else {
+        console.log("Error!!");
+      }
+    });
+    return false;
   }
 
   function logoff() {

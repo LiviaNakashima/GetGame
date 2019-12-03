@@ -312,6 +312,30 @@
   verificarAutenticacao();
   document.querySelector('#nomeUsuario').value = usuario;
   listarServidores();
+  window.setInterval('verificaServidor()', 60000);
+
+  function verificaServidor(){
+    var usuario = usuarioLogado.textContent;
+    fetch(`/servidor/VerificarDisponibilidade`, {
+      method: "POST",
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        usuario,
+      })
+    }).then(function (response) {
+      if (response.ok) {
+        response.json().then(function (resposta) {
+          console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
+          listarServidores();
+          });
+      } else {
+        console.log("Error!!");
+      }
+    });
+    return false;
+  }
 
   function verificarAutenticacao() {
     usuario = sessionStorage.nome;
@@ -368,6 +392,7 @@
               `   <tr>
                       <td>${linha.loginServidor}</td>
                       <td>${linha.linkServidor}</td>
+                      <td>${linha.statusServidor}</td>
                     </tr>
                 `;
             document.getElementById(`lista_servidores`).innerHTML += conteudo;
