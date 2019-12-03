@@ -258,13 +258,14 @@
         </div>
         <!-- End of Main Content -->
 
-        <div class="container-fluid" style="text-align: center;">
+        <div class="container" style="text-align: center;">
 
           <h1 class="h3 mb-0 text-gray-800" id="lbNomeServidor" style="display: none;">Dashboard</h1>
+          <h5 id="lbHorarioServidor"></h5>
 
           <div class="row-fluid mb-0" style="text-align:center">
             <div class="chart-area" style="display:flex; margin-top: 5%; text-align: center;">
-              <div class="card text-center" style="height: 450px; display: none;" id="card-disco">
+              <div class="card text-left" style="height: 450px; display: none;" id="card-disco">
                 <!-- <div class="container-fluid" style="width:500px; height: 200px"> -->
                 <div class="card-header">
                   Disco rígido
@@ -275,16 +276,18 @@
                     <canvas style="display:none; width:500px; height: 200px" id="myDiskChart"></canvas>
                   </div>
 
-                  <h5 class="card-title">Legenda</h5>
                   <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Disponível <b id="dadosDiscoDisponivel"></b>%<br>
+                    
+                    <li class="list-group-item">
+                      <h5>Legenda</h5>
+                      Disponível <b id="dadosDiscoDisponivel"></b>%<br>
                       Indisponível <b id="dadosDiscoIndisponivel"></b>%
                     </li>
                   </ul>
                 </div>
                 <!-- </div> -->
               </div>
-              <div class="card text-center" style="height: 450px; display: none;" id="card-ram">
+              <div class="card text-left" style="height: 450px; display: none;" id="card-ram">
                 <!-- <div class="container-fluid" style="width:500px; height: 200px"> -->
                 <div class="card-header">
                   Memória Ram
@@ -295,16 +298,17 @@
                     <canvas style="display:none; width:500px; height: 200px" id="myRamChart"></canvas>
                   </div>
 
-                  <h5 class="card-title">Legenda</h5>
                   <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Disponível <b id="dadosRamDisponivel"></b>%<br>
+                    <li class="list-group-item">
+                      <h5>Legenda</h5>
+                      Disponível <b id="dadosRamDisponivel"></b>%<br>
                       Indisponível <b id="dadosRamIndisponivel"></b>%
                     </li>
                   </ul>
                 </div>
                 <!-- </div> -->
               </div>
-              <div class="card text-center" style="height: 450px; display: none;" id="card-cpu">
+              <div class="card text-left" style="height: 450px; display: none;" id="card-cpu">
                 <!-- <div class="container-fluid" style="width:500px; height: 200px"> -->
                 <div class="card-header">
                   Processador
@@ -315,9 +319,10 @@
                     <canvas style="display:none; width:500px; height: 200px" id="myCpuChart"></canvas>
                   </div>
 
-                  <h5 class="card-title">Legenda</h5>
                   <ul class="list-group list-group-flush">
-                    <li class="list-group-item">Disponível <b id="dadosCpuDisponivel"></b>%<br>
+                    <li class="list-group-item">
+                      <h5>Legenda</h5>
+                      Disponível <b id="dadosCpuDisponivel"></b>%<br>
                       Indisponível <b id="dadosCpuIndisponivel"></b>%
                     </li>
                   </ul>

@@ -180,6 +180,8 @@ function obterDadosGraficos() {
           document.getElementById('dadosDiscoIndisponivel').innerHTML = discoIndisponivel;
           document.getElementById('dadosDiscoDisponivel').innerHTML = discoDisponivel;
 
+          document.getElementById('lbHorarioServidor').innerHTML = registro.dataHora;
+
 
           if (ramDisponivel <= 20) {
             corDisponivelRam = corCritico;
