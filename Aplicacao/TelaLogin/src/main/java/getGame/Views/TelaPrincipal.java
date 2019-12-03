@@ -66,7 +66,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                     insertThread = new Thread(gravarBanco);
                     insertThread.start();
                     insertThread.sleep(30000);
-                    processosThread.sleep(30000);
+                    processosThread.sleep(50000);
                     Util.sleep(5000);
                 }
             } catch (Exception e) {
@@ -104,7 +104,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                         insertProcesso.add(newObject.get(i+1));
                     }
                 }
-                processosDAO.inserirProcessos(insertProcesso);
+//                processosDAO.inserirProcessos(insertProcesso);;
             } catch (Exception e){}
  
         }
@@ -114,7 +114,12 @@ public class TelaPrincipal extends javax.swing.JFrame {
         public void run() {
             try{
                 Thread logsThread;
-                if(cpu.getCPUUsada() > 70 || ram.getMemoriaUsada() > 70 || disk.getEspacoUsado() > 70) {
+                double cpuZ, ramZ, diskZ;
+                cpuZ = cpu.getCPUUsada();
+                ramZ = ram.getMemoriaUsada();
+                diskZ = disk.getEspacoUsado();
+                
+                if((cpuZ > 70 && cpuZ < 99)|| (ramZ > 70 && ramZ < 99)|| (diskZ > 70 && diskZ < 99)) {
                     GetGameBot telegram = new GetGameBot();
                     telegram.apiTelegram(log);
                     logsThread = new Thread(gravarLogs);
@@ -129,7 +134,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
         public void run() {
             try{
                 status.inserirStatusServidor(cpu.getCPUUsada(), ram.getMemoriaUsada(), disk.getEspacoUsado(),
-                            "on", 1, LocalDateTime.now());
+                            "on", 1, LocalDateTime.now().minusHours(1));
             } catch (Exception e){}
  
         }

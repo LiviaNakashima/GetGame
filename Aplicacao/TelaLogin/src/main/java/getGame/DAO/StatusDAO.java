@@ -15,10 +15,10 @@ import org.springframework.jdbc.core.JdbcTemplate;
  */
 public class StatusDAO {
     private JdbcTemplate jdbcTemplate;
+    Conexao conect = new Conexao();
     
     public boolean inserirStatusServidor
         (Float cpu, Float ram, Float disco, String status, Integer codServidor, LocalDateTime data){
-        Conexao conect = new Conexao();
         
         jdbcTemplate = new JdbcTemplate(conect.getDataSource());
         
@@ -33,5 +33,16 @@ public class StatusDAO {
         return true;
     }
 
+    public boolean inserirIndisponibilidade(){
+        
+        jdbcTemplate = new JdbcTemplate(conect.getDataSource());
+        
+        try {
+            jdbcTemplate.update("exec Disponibilidade;");
+        } catch (Exception e) {
+            System.out.println(e);
+        }
+        return true;
+    }
     
 }
