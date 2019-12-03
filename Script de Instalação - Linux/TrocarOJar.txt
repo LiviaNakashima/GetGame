@@ -1,2 +1,0 @@
-Trocar o arquivo .jar para o nosso quando for gerado
-
