@@ -7,7 +7,7 @@ var banco = require('../app-banco');
 router.get('/ListarAuditoria', function (req, res, next) {
     console.log(banco.conexao);
     banco.conectar().then(() => {
-      return banco.sql.query(`select * from tbAuditoria`);
+      return banco.sql.query(`select top(10) * from tbAuditoria order by codAuditoria desc`);
     }).then(consulta => {
   
       console.log(`Resultado da consulta de auditoria: ${JSON.stringify(consulta.recordset)}`);

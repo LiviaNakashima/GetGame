@@ -304,15 +304,22 @@
 
           document.getElementById(`lista_auditoria`).innerHTML = '';
           for (const linha of resposta) {
+            var dataFormatada = new Date(linha.dataHoraAuditoria);
+            var fuso = (dataFormatada.getTimezoneOffset()/60 - 5);
+            if (fuso) {
+              dataFormatada = (new Date(dataFormatada.valueOf() + (fuso * 3600000)).toISOString().
+              replace(/T/, ' ').      // replace T with a space
+              replace(/\..+/, ''));
+            }
             let conteudo =
               `
                 <tr>
                       <td>${linha.codAuditoria}</td>
                       <td>${linha.codServidor}</td>
                       <td>${linha.tbAuditada}</td>
-                      <td>${linha.tipoAcao}</td>
                       <td>${linha.tbCamposAuditados}</td>
-                      <td>${linha.dataHoraAuditoria}</td>
+                      <td>${linha.tipoAcao}</td>
+                      <td>${dataFormatada}</td>
                       <td>${linha.codUsuario}</td>
                       <td>${linha.nomeUsuario}</td>
                     </tr>
