@@ -183,7 +183,6 @@
               <button class="btn btn-secondary btn-lg active btn-dashboard" onclick="clicarDisponibilidade()">
                 <a href="#" aria-pressed="true" onclick="clicarDisponibilidade()"
                   class="a-dashboard">Disponibilidade</a>
-                  <span id="graficoDisponibilidade"></span>
               </button>
             </div>
 
@@ -252,26 +251,17 @@
                 <!-- Card Header - Dropdown -->
                 <div class="card-header py-3 d-flex flex-row align-items-center justify-content-between">
                   <h6 class="m-0 font-weight-bold text-dashboard">Disponibilidade</h6>
-                  <div class="dropdown no-arrow">
-                    <a class="dropdown-toggle" href="#" role="button" id="dropdownMenuLink" data-toggle="dropdown"
-                      aria-haspopup="true" aria-expanded="false">
-                      <i class="fas fa-ellipsis-v fa-sm fa-fw text-gray-400"></i>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-right shadow animated--fade-in"
-                      aria-labelledby="dropdownMenuLink">
-                      <div class="dropdown-header">Dropdown Header:</div>
-                      <a class="dropdown-item" href="#">Action</a>
-                      <a class="dropdown-item" href="#">Another action</a>
-                      <div class="dropdown-divider"></div>
-                      <a class="dropdown-item" href="#">Something else here</a>
-                    </div>
-                  </div>
                 </div>
                 <!-- Card Body -->
 
                 <div class="card-body2">
+                  <h5 id="lbNomeServidor" style="margin:2%;"></h5>
                   <div class="container-fluid" style="text-align: center;">
-                  </div>
+                    <div class="card-img-center">
+                      <canvas style="display:block; height: 300px;" id="graficoDisponibilidade"></canvas>
+                    </div>
+                    <h3 id="lbStatusServidor" style="text-align: right;"></h3>
+                </div>
                 </div>
 
               </div>
@@ -419,7 +409,8 @@
   <script src="js/demo/chart-pie-demo.js"></script>
   <script src="js/demo/chart-bar-demo.js"></script>
   <script src="js/demo/chart-area-demo2.js"></script>
-  <script src="js/demo/chart-rosquinha-demo.js"></script>
+
+  <script src="js/demo/chartDisponibilidade.js"></script>
 
 </body>
 
@@ -432,7 +423,7 @@
   verificarPermissao();
   window.setInterval('verificaServidor()', 60000);
 
-  function verificaServidor(){
+  function verificaServidor() {
     var usuario = usuarioLogado.textContent;
     fetch(`/servidor/VerificarDisponibilidade`, {
       method: "POST",
@@ -446,7 +437,7 @@
       if (response.ok) {
         response.json().then(function (resposta) {
           console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-          });
+        });
       } else {
         console.log("Error!!");
       }
@@ -521,8 +512,9 @@
     box3.style.display = "none";
     box4.style.display = "none";
     box5.style.display = "none";
+    atualizarGraficos();
 
-    
+
   }
 
 

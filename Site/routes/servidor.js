@@ -1,7 +1,7 @@
 // não mexa nestas 3 linhas!
 var express = require('express');
 var router = express.Router();
-var banco = require('../app-banco');
+var banco = require('../app-banco'); 
 // não mexa nessas 3 linhas!
 
 router.post('/ListarServidorAdm', function (req, res, next) {
@@ -65,19 +65,31 @@ router.post('/ListarServidor', function (req, res, next) {
   });
 
 
-  router.post('/ListarDisponibilidade', function (req, res, next) {
-    var usuario = req.body.usuario;
-    console.log(usuario);
-    console.log(banco.conexao);
+  router.get('/ListarDisponibilidade', function (req, res, next) {
+    //var usuario = req.body.usuario;
+    //console.log(usuario);
+    //console.log(banco.conexao);
+    var leituraDados = {
+      dispMes: 0,
+      indisMes: 0,
+      linkServidor: "",
+      statusServidor: ""
+    };
+
     banco.conectar().then(() => {
-      return banco.sql.query(`select disponivelMes, indisponivelMes from tbServidor where codServidor = 1`);
+      return banco.sql.query(`select statusServidor as statusServidor, linkServidor as linkServidor, disponivelMes as dispMes, indisponivelMes as indisMes from tbServidor where codServidor = 1`);
     }).then(consulta => {
       console.log(`Resultado da consulta de servidores: ${JSON.stringify(consulta.recordset)}`);
   
       if (consulta.recordset.length == 0) {
         res.status(404).send('Nenhum servidor encontrado');
       } else {
+        leituraDados.dispMes = consulta.recordset[0].dispMes;
+        leituraDados.indisMes = consulta.recordset[0].indisMes;
+        leituraDados.linkServidor = consulta.recordset[0].linkServidor;
+        leituraDados.statusServidor = consulta.recordset[0].statusServidor;
         res.send(consulta.recordset);
+
       }
   
     }).catch(err => {
