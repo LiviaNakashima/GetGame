@@ -56,10 +56,10 @@ function obterDadosGraficos() {
   dadosDisponibilidade = {
 
     datasets: [{
-      data: [porcentagemIndisponivel, porcentagemDisponivel],
+      data: [ minutosDisponiveis, minutosIndisponiveis],
       backgroundColor: [corDisponivel, corIndisponivel]
     }],
-    labels: [`Disponivel (${minutosDisponiveis} minutos)`, `Indisponivel (${minutosIndisponiveis} minutos)`]
+    labels: [`Disponivel (${ porcentagemIndisponivel }%)`, `Indisponivel (${porcentagemDisponivel}%)`]
   };
 
   fetch(`/servidor/ListarDisponibilidade`, { method: "GET" }).then(function (response) {
