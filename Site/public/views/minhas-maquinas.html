@@ -389,8 +389,6 @@
 
 </html>
 <script>
-
-
   document.querySelector('#pagina').innerHTML = `<div class="modal fade" id="modalSelecionarServidor" tabindex="-1" role="dialog" aria-labelledby="modalSelecionarServidorLabel"
             aria-hidden="true">
             <div class="modal-dialog modal-dialog-centered modal-lg">
@@ -416,9 +414,6 @@
                 </div>
          </div>
 `;
-
-
-
   function selecionarServidor() {
     $('#modalSelecionarServidor').modal('hide');
     var a = nomeServidor.selectedOptions.valueOf(nomeServidor.selectedIndex);
@@ -430,16 +425,10 @@
     document.getElementById('card-disco').style.display = 'inline';
     document.getElementById('card-ram').style.display = 'inline';
     document.getElementById('card-cpu').style.display = 'inline';
-
-
-
-
     atualizarGraficos();
     //atualizarGraficoRam();
     //atualizarGraficoCpu();
-
   }
-
   $(document).ready(function () {
     $('#modalSelecionarServidor').modal('show');
   })
@@ -448,7 +437,6 @@
   verificarPermissao();
   
   window.setInterval('verificaServidor()', 60000);
-
   function verificarAutenticacao() {
     usuario = sessionStorage.nome;
     if (usuario == undefined) {
@@ -458,7 +446,6 @@
       usuarioLogado.innerHTML = usuario;
     }
   }
-
   function verificaServidor(){
     var usuario = usuarioLogado.textContent;
     fetch(`/servidor/VerificarDisponibilidade`, {
@@ -480,12 +467,10 @@
     });
     return false;
   }
-
   function logoff() {
     sessionStorage.removeItem('nome');
     verificarAutenticacao();
   }
-
   function verificarPermissao() {
     if (sessionStorage.permissao == "true") {
       let conteudo =
@@ -495,14 +480,12 @@
               <i class="fas fa-fw fa-table"></i>
               <span>Cadastrar Servidores</span></a>
           </li>
-
           <!-- Nav Item - Tables -->
           <li class="nav-item ">
             <a class="nav-link" href="usuario.html">
               <i class="fas fa-fw fa-table"></i>
               <span>Cadastrar Usuario</span></a>
           </li>
-
           <!-- Nav Item - Tables -->
           <li class="nav-item">
             <a class="nav-link" href="auditoria.html">
@@ -516,7 +499,6 @@
       document.getElementById(`acessoAdministrador`).innerHTML += conteudo;
     }
   }
-
   function listarServidores() {
     fetch(`/servidor/ListarServidor`, {
       method: "POST",
@@ -530,7 +512,6 @@
       if (response.ok) {
         response.json().then(function (resposta) {
           console.log(`Dados recebidos: ${JSON.stringify(resposta)}`);
-
           document.getElementById(`nomeServidor`).innerHTML = '';
           for (const linha of resposta) {
             let conteudo =
@@ -540,26 +521,20 @@
             document.getElementById(`nomeServidor`).innerHTML += conteudo;
           }
         });
-
       } else {
         console.log("Error!!");
       }
     });
     return false;
   }
-
-
-
   function aguardar() {
     //desabilita o botão
     btn_entrar.disabled = true;
     btn_cadastrar.disabled = true;
   }
-
   function finalizar_aguardar() {
     //habilita o botão
     btn_entrar.disabled = false;
     aviso1.innerHTML = '*E-mail ou Senha incorretos!<br>Ou erro com a conexão da internet';
   }
-
 </script>
