@@ -17,7 +17,7 @@ public class StatusDAO {
     private JdbcTemplate jdbcTemplate;
     Conexao conect = new Conexao();
     
-    public boolean inserirStatusServidor
+    public String inserirStatusServidor
         (Float cpu, Float ram, Float disco, String status, Integer codServidor, LocalDateTime data){
         
         jdbcTemplate = new JdbcTemplate(conect.getDataSource());
@@ -28,21 +28,11 @@ public class StatusDAO {
                     cpu.toString().replace(",", ".").substring(0, 5), ram.toString().replace(",", ".").substring(0, 5), 
                     disco.toString().replace(",", ".").substring(0, 5), status, codServidor, data);
         } catch (Exception e) {
-            System.out.println(e);
+            String excessao = e.toString();
+            return excessao;
         }
-        return true;
-    }
-
-    public boolean inserirIndisponibilidade(){
         
-        jdbcTemplate = new JdbcTemplate(conect.getDataSource());
-        
-        try {
-            jdbcTemplate.update("exec Disponibilidade;");
-        } catch (Exception e) {
-            System.out.println(e);
-        }
-        return true;
+        return "Dados atuais de hardware registrados com sucesso";
     }
     
 }

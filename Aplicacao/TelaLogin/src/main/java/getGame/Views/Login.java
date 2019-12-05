@@ -7,7 +7,6 @@ package getGame.Views;
 
 import getGame.DAO.Conexao;
 import java.awt.Color;
-import java.awt.Image;
 import java.awt.event.FocusEvent;
 import java.awt.event.FocusListener;
 import java.util.List;
@@ -33,10 +32,8 @@ public class Login extends javax.swing.JFrame {
     Conexao dadosConexao = new Conexao();
         
     JdbcTemplate jdbcTemplate = new JdbcTemplate(dadosConexao.getDataSource());
-    Logger gameLog = Logger.getLogger("game");
     public Login() {
         initComponents();
-        setPlaceholders();
         
         //this.setIconImage(new javax.swing.ImageIcon(getClass().getResource("/image1.png"))
           //  .getImage());
@@ -127,7 +124,6 @@ public class Login extends javax.swing.JFrame {
         });
 
         txtLogin.setForeground(new java.awt.Color(102, 102, 102));
-        txtLogin.setText("EX: 12345678910");
         txtLogin.setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
         txtLogin.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -136,7 +132,6 @@ public class Login extends javax.swing.JFrame {
         });
 
         txtSenha.setForeground(new java.awt.Color(153, 153, 153));
-        txtSenha.setText("12345678");
         txtSenha.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 txtSenhaActionPerformed(evt);
@@ -223,7 +218,6 @@ public class Login extends javax.swing.JFrame {
                 txtLogin.getText(),txtSenha.getText());
         List<Map<String,Object>> query = jdbcTemplate.queryForList(
         selectBanco);
-        System.out.println(query);
         return query;
     }
     
@@ -260,44 +254,6 @@ public class Login extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_txtSenhaActionPerformed
 
-     public void setPlaceholders() {
-            
-         
-         
-        txtLogin.addFocusListener(new FocusListener() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                if (txtLogin.getText().equals("Digite seu user ID, ex: 12345678910")) {
-                    txtLogin.setText("");
-                }
-            }
-
-            @Override
-            public void focusLost(FocusEvent e) {
-                if (txtLogin.getText().equals("")) {
-                    txtLogin.setText("Digite seu user ID, ex: 12345678910");
-                }
-            }
-        });
-        
-            txtSenha.addFocusListener(new FocusListener() {
-            @Override
-            public void focusGained(FocusEvent e) {
-                if (txtSenha.getText().equals("teste")) {
-                    txtSenha.setText("");
-                }
-            }
-
-            @Override
-            public void focusLost(FocusEvent e) {
-                if (txtSenha.getText().equals("")) {
-                    txtSenha.setText("teste");
-                }
-            }
-            });
-        
-            }
-    
     /**
      * @param args the command line arguments
      */

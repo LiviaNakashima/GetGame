@@ -24,7 +24,7 @@ public class GeracaoLog {
 
         File pasta = new File("C:\\getGameLogs\\");
 
-        boolean pastaCriada = pasta.mkdir();
+       // boolean pastaCriada = pasta.mkdir();
 
         File arquivo = new File("C:\\getGameLogs\\logGetGame.txt");
 

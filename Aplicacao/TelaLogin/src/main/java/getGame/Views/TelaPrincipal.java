@@ -55,6 +55,7 @@ public class TelaPrincipal extends javax.swing.JFrame {
                      cpu.getCPUUsada().toString(),
                      ram.getMemoriaUsada().toString().substring(0, 5),
                      (disk.getEspacoUsado()+"").substring(0, 5));
+                    gameLog.info(log);
                     lbCPU.setText(cpu.getCPU());
                     lbRAM.setText(ram.getRAM());
                     lbHD.setText(disk.getDisco());
@@ -65,9 +66,11 @@ public class TelaPrincipal extends javax.swing.JFrame {
                     telegramThread.start();
                     insertThread = new Thread(gravarBanco);
                     insertThread.start();
+                    gameLog.warning("Threads iniciadas, chamando Listagem de processos, telegram e gravação no banco");
                     insertThread.sleep(30000);
                     processosThread.sleep(50000);
                     Util.sleep(5000);
+                    gameLog.warning("Threads 'dormindo'");
                 }
             } catch (Exception e) {
             }
@@ -122,9 +125,9 @@ public class TelaPrincipal extends javax.swing.JFrame {
                 if((cpuZ > 70 && cpuZ < 99)|| (ramZ > 70 && ramZ < 99)|| (diskZ > 70 && diskZ < 99)) {
                     GetGameBot telegram = new GetGameBot();
                     telegram.apiTelegram(log);
-                    logsThread = new Thread(gravarLogs);
-                    logsThread.start();
                 }
+                logsThread = new Thread(gravarLogs);
+                logsThread.start();
             } catch (Exception e){}
  
         }
@@ -133,8 +136,8 @@ public class TelaPrincipal extends javax.swing.JFrame {
     private Runnable gravarBanco = new Runnable() {
         public void run() {
             try{
-                status.inserirStatusServidor(cpu.getCPUUsada(), ram.getMemoriaUsada(), disk.getEspacoUsado(),
-                            "on", 1, LocalDateTime.now().minusHours(1));
+                gameLog.warning(status.inserirStatusServidor(cpu.getCPUUsada(), ram.getMemoriaUsada(), disk.getEspacoUsado(),
+                            "on", 1, LocalDateTime.now().minusHours(1)));
             } catch (Exception e){}
  
         }
@@ -314,14 +317,14 @@ public class TelaPrincipal extends javax.swing.JFrame {
                     .addComponent(jLabel8)
                     .addGroup(layout.createSequentialGroup()
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 67, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 60, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(jLabel6, javax.swing.GroupLayout.PREFERRED_SIZE, 82, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(54, 54, 54)
+                                .addGap(39, 39, 39)
                                 .addComponent(btIniciar))
                             .addGroup(layout.createSequentialGroup()
-                                .addGap(26, 26, 26)
+                                .addGap(11, 11, 11)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                                     .addComponent(lbRAM, javax.swing.GroupLayout.DEFAULT_SIZE, 217, Short.MAX_VALUE)
                                     .addComponent(lbHD, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
