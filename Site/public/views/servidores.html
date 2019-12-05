@@ -312,7 +312,7 @@
   verificarAutenticacao();
   document.querySelector('#nomeUsuario').value = usuario;
   listarServidores();
-  window.setInterval('verificaServidor()', 60000);
+  window.setInterval('verificaServidor()', 20000);
 
   function verificaServidor(){
     var usuario = usuarioLogado.textContent;

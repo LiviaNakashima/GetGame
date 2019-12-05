@@ -436,7 +436,7 @@
   listarServidores();
   verificarPermissao();
   
-  window.setInterval('verificaServidor()', 60000);
+  window.setInterval('verificaServidor()', 20000);
   function verificarAutenticacao() {
     usuario = sessionStorage.nome;
     if (usuario == undefined) {
